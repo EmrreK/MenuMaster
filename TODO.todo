@@ -3,10 +3,10 @@
 
 ☐ [ ] **Auth (Authentication & Authorization)
   - [ ] Registration & Login
-    - [ ] Install JWT and bcrypt
+    ✔ [ ] Install JWT and bcrypt @done(24-10-16 17:37)
     ☐ [ ] Create user schema (admin, customer)  
-    - [ ] Set up registration route (hash password, save user)
-    - [ ] Set up login route (verify credentials, return JWT token)
+    ✔ [ ] Set up registration route (hash password, save user) @done(24-10-16 17:37)
+    ✔ [ ] Set up login route (verify credentials, return JWT token) @done(24-10-16 17:37)
     - [ ] Create JWT middleware for route protection
   - [ ] Test registration and login routes using Postman
   - [ ] Apply JWT middleware to protect admin-only routes
