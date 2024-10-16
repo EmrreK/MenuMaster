@@ -4,9 +4,11 @@ const bcrypt = require("bcryptjs");
 const Table = require("../models/Table");
 const User = require("../models/User");
 
+const {MONGO_URI} = process.env;
+
 // Connect to your MongoDB database
 mongoose
-	.connect("mongodb://localhost:27017/MenuMaster")
+	.connect(MONGO_URI)
 	.then(async () => {
 		console.log("MongoDB connected");
 

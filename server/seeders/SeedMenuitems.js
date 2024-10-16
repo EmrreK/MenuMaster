@@ -2,9 +2,11 @@ const mongoose = require("mongoose");
 const {faker} = require("@faker-js/faker");
 const MenuItem = require("../models/MenuItem");
 
+const {MONGO_URI} = process.env;
+
 // Connect to your MongoDB database
 mongoose
-	.connect("mongodb://localhost:27017/MenuMaster")
+	.connect(MONGO_URI)
 	.then(async () => {
 		console.log("MongoDB connected");
 
