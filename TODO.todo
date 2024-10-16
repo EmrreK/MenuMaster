@@ -1,0 +1,111 @@
+// Backend - Node.js + Express
+
+
+- [ ] **Auth (Authentication & Authorization)**
+  - [ ] Registration & Login
+    - [ ] Install JWT and bcrypt
+    - [ ] Create user schema (admin, customer)
+    - [ ] Set up registration route (hash password, save user)
+    - [ ] Set up login route (verify credentials, return JWT token)
+    - [ ] Create JWT middleware for route protection
+  - [ ] Test registration and login routes using Postman
+  - [ ] Apply JWT middleware to protect admin-only routes
+
+- [ ] **Menu Management (Admin)**
+  - [ ] Create menu schema (name, description, price, availability)
+  - [ ] Create Mongoose model for menu
+  - [ ] Create CRUD routes for menu
+    - [ ] POST /menu (add new menu item)
+    - [ ] GET /menu (get all menu items)
+    - [ ] PUT /menu/:id (update menu item)
+    - [ ] DELETE /menu/:id (delete menu item)
+  - [ ] Test menu routes using Postman
+
+- [ ] **Table Management (Admin)**
+  - [ ] Create table schema (table number, availability, QR code)
+  - [ ] Create Mongoose model for tables
+  - [ ] Create CRUD routes for tables
+    - [ ] POST /tables (add new table)
+    - [ ] GET /tables (get all tables)
+    - [ ] PUT /tables/:id (update table status)
+    - [ ] DELETE /tables/:id (delete table)
+  - [ ] Implement QR code generation for each table
+  - [ ] Store QR code URL in the table schema
+  - [ ] Test table management routes using Postman
+
+- [ ] **Order Management (Customer)**
+  - [ ] Create order schema (table number, order details, status, timestamp)
+  - [ ] Create Mongoose model for orders
+  - [ ] Create routes for order management
+    - [ ] POST /orders (place an order)
+    - [ ] GET /orders/table/:id (view orders for a table)
+    - [ ] PUT /orders/:id (update order status)
+  - [ ] Test order management routes using Postman
+
+- [ ] **Seat Availability & Reservation (Customer)**
+  - [ ] Create reservation schema (table ID, date, time slot, customer ID)
+  - [ ] Create Mongoose model for reservations
+  - [ ] Create routes for seat reservations
+    - [ ] GET /seats (check seat availability)
+    - [ ] POST /seats (reserve a seat)
+  - [ ] Test seat reservation routes
+
+- [ ] **Real-Time Updates (Optional)**
+  - [ ] Install Socket.io for real-time order updates
+  - [ ] Set up WebSocket server for order status updates
+  - [ ] Connect WebSocket on frontend for live updates
+
+// Frontend - React
+
+- [ ] **Basic Pages**
+  - [ ] Set up React Router for navigation between pages
+  - [ ] Create basic pages
+    - [ ] Home page with navigation
+    - [ ] Admin login page
+    - [ ] Customer menu page
+
+- [ ] **Admin Dashboard**
+  - [ ] Build menu management UI
+    - [ ] Create form to add/edit menu items
+    - [ ] Display list of menu items with edit/delete options
+  - [ ] Build table management UI
+    - [ ] Create form to add/edit tables
+    - [ ] Display list of tables with QR codes and availability status
+  - [ ] Build order management UI
+    - [ ] Display list of current orders with status
+    - [ ] Add buttons to update order status (pending, preparing, served)
+
+- [ ] **Customer Interface**
+  - [ ] Create page for scanning QR code and displaying menu
+  - [ ] Build interface to place orders and view order status
+  - [ ] Create seat availability page for customers to view and reserve tables
+
+- [ ] **User Authentication UI**
+  - [ ] Create admin registration and login forms
+  - [ ] Implement JWT handling (storing tokens, redirecting users based on login status)
+  - [ ] Protect admin pages with authentication
+
+- [ ] **QR Code Display**
+  - [ ] Create a button in admin panel to generate and display QR codes for each table
+  - [ ] Link QR codes to customer menu page for placing orders
+
+// Features
+
+- [ ] **Order History & Analytics (Admin)**
+  - [ ] Add schema for order history (time, date, total sales, popular items)
+  - [ ] Display order history in the admin dashboard
+  - [ ] Add analytics dashboard (total sales, most popular items)
+
+- [ ] **Reservation System**
+  - [ ] Allow customers to select a date and time for reservations
+  - [ ] Display confirmed reservations to admin
+  - [ ] Show reserved tables in seat availability view
+
+- [ ] **Notifications**
+  - [ ] Implement system to notify customers when their order is ready
+  - [ ] Set up email or SMS notifications for seat reservations
+
+- [ ] **Testing & Debugging**
+  - [ ] Write unit tests for backend routes (Jest)
+  - [ ] Write unit tests for frontend components (React Testing Library)
+  - [ ] Perform integration tests for full order and reservation flow
