@@ -4,7 +4,7 @@
 ☐ [ ] **Auth (Authentication & Authorization)
   - [ ] Registration & Login
     - [ ] Install JWT and bcrypt
-    ☐ [ ] Create user schema (admin, customer)  
+    ✔ [ ] Create user schema (admin, customer) @started(24-10-16 17:32) @done(24-10-16 17:42) @lasted(10m21s)
     - [ ] Set up registration route (hash password, save user)
     - [ ] Set up login route (verify credentials, return JWT token)
     - [ ] Create JWT middleware for route protection
