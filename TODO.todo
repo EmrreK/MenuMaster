@@ -11,8 +11,8 @@
   - [ ] Apply JWT middleware to protect admin-only routes
 
 - [ ] **Menu Management (Admin)**
-  - [ ] Create menu schema (name, description, price, availability)
-  - [ ] Create Mongoose model for menu
+  ✔ [ ] Create menu schema (name, description, price, availability) @started(24-10-16 17:59) @done(24-10-16 18:23) @lasted(24m23s)
+  ✔ [ ] Create Mongoose model for menu @started(24-10-16 17:59) @done(24-10-16 18:23) @lasted(24m24s)
   - [ ] Create CRUD routes for menu
     - [ ] POST /menu (add new menu item)
     - [ ] GET /menu (get all menu items)
