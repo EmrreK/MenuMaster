@@ -26,7 +26,7 @@ const MenuItemSchema = new mongoose.Schema({
 	},
 
 	image: {
-		type: Image,
+		type: String,
 		required: false,
 		default: "/public/Images/defaultMenuIcon.png",
 	},
