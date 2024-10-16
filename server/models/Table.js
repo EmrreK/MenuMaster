@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const tableSchema = new mongoose.Schema({
 	tableNumber: {
 		type: String,
-		unique: true,
-		required: true,
+		default: "1",
+		// required: true,
 	},
 	qrCodeUrl: {
 		type: String,
-		required: true,
+		// required: true,
 	},
 	// isAvailable: {
 	// 	type: Boolean,

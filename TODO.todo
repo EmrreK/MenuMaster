@@ -1,13 +1,13 @@
 // Backend - Node.js + Express
 
 
-☐ [ ] **Auth (Authentication & Authorization)
+✔ [ ] **Auth (Authentication & Authorization) @done(24-10-16 20:29)
   ✔ [ ] Registration & Login @done(24-10-16 19:05)
     ✔ [ ] Install JWT and bcrypt @done(24-10-16 17:37)
     ✔ [ ] Set up registration route (hash password, save user) @done(24-10-16 17:37)
     ✔ [ ] Set up login route (verify credentials, return JWT token) @done(24-10-16 17:37)
     ✔ [ ] Create user schema (admin, customer) @started(24-10-16 17:32) @done(24-10-16 17:42) @lasted(10m21s)
-  - [ ] Test registration and login routes using Postman
+  ✔ [ ] Test registration and login routes using Postman @done(24-10-16 20:29)
 
 ✔ [ ] **Menu Management (Admin)** @done(24-10-16 19:05)
   ✔ [ ] Create menu schema (name, description, price, availability) @started(24-10-16 17:59) @done(24-10-16 18:23) @lasted(24m23s)
@@ -17,7 +17,7 @@
     ✔ [ ] GET /menu (get all menu items) @started(24-10-16 18:46) @done(24-10-16 18:50) @lasted(4m45s)
     ✔ [ ] PUT /menu/:id (update menu item) @started(24-10-16 18:57) @done(24-10-16 19:01) @lasted(4m22s)
     ✔ [ ] DELETE /menu/:id (delete menu item) @started(24-10-16 19:03) @done(24-10-16 19:05) @lasted(2m2s)
-  - [ ] Test menu routes using Postman
+  ✔ [ ] Test menu routes using Postman @done(24-10-16 20:29)
 
 - [ ] **Table Management (Admin)**
   ✔ [ ] Create table schema (table number, availability, QR code) @done(24-10-16 18:43)

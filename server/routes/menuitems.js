@@ -2,23 +2,20 @@ const express = require("express");
 const router = express.Router();
 const MenuItem = require("../models/MenuItem");
 
-router.post("/create", async (req, res) => {
+// Create Menu Item
+router.post("/", async (req, res) => {
 	const {name, description, price, availability, category, image} = req.body;
-	if (
-		!name ||
-		!description ||
-		!price ||
-		!availability ||
-		!category ||
-		!image
-	) {
+
+	if (!name || !description || !price || !category) {
 		return res.status(400).json({message: "All fields are required!"});
 	}
+
 	try {
-		const item = MenuItem.findOne({name});
+		// Correct way to find an existing item
+		const item = await MenuItem.findOne({name}); // Use an object to search
 		if (item) {
 			return res.status(400).json({
-				message: "The item you are trying to create is already exists!",
+				message: "The item you are trying to create already exists!",
 			});
 		}
 
@@ -26,29 +23,32 @@ router.post("/create", async (req, res) => {
 			name,
 			description,
 			price,
-			availability,
+			availability, // Ensure this is handled correctly in your schema
 			category,
 			image,
 		});
+
 		await newMenuItem.save();
 		return res.json({message: "Menu item created successfully!"});
 	} catch (error) {
 		console.error(error);
-		res.status(500).send("Server error");
+		return res.status(500).json({message: error.message}); // Send the error message
 	}
 });
 
-router.get("/menuItems", async (req, res) => {
+// Get all Menu Items
+router.get("/", async (req, res) => {
 	try {
-		const MenuItems = await MenuItem.find({});
-		return res.json(MenuItems);
+		const menuItems = await MenuItem.find({});
+		return res.json(menuItems);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({message: error.message});
 	}
 });
 
-router.put("/menuItems/:id", async (req, res) => {
+// Update Menu Item
+router.put("/:id", async (req, res) => {
 	const {id} = req.params;
 	const {name, description, price, availability, category, image} = req.body;
 
@@ -58,6 +58,7 @@ router.put("/menuItems/:id", async (req, res) => {
 			{name, description, price, availability, category, image},
 			{new: true, runValidators: true}
 		);
+
 		if (!updatedItem) {
 			return res.status(404).json({message: "Menu item not found!"});
 		} else {
@@ -69,7 +70,8 @@ router.put("/menuItems/:id", async (req, res) => {
 	}
 });
 
-router.delete("/menuItems/:id", async (req, res) => {
+// Delete Menu Item
+router.delete("/:id", async (req, res) => {
 	const {id} = req.params;
 
 	try {

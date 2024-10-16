@@ -11,8 +11,8 @@ const {PORT, MONGO_URI, SESSION_SECRET} = process.env;
 const app = express();
 
 userRouter = require("./routes/users");
-userRouter = require("./routes/tables");
-userRouter = require("./routes/menuitems");
+tableRouter = require("./routes/tables");
+menuRouter = require("./routes/menuitems");
 
 mongoose
 	.connect(MONGO_URI)
@@ -43,8 +43,8 @@ const passportConfig = require("./config/passportConfig");
 passportConfig(passport);
 
 app.use("/api/users", userRouter);
-app.use("/api/tables", userRouter);
-app.use("/api/menu", userRouter);
+app.use("/api/tables", tableRouter);
+app.use("/api/menuitem", menuRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server is running on http://localhost:${PORT}`);
