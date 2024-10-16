@@ -1,10 +1,10 @@
 // Backend - Node.js + Express
 
 
-- [ ] **Auth (Authentication & Authorization)**
+☐ [ ] **Auth (Authentication & Authorization)
   - [ ] Registration & Login
     - [ ] Install JWT and bcrypt
-    - [ ] Create user schema (admin, customer)
+    ☐ [ ] Create user schema (admin, customer)  
     - [ ] Set up registration route (hash password, save user)
     - [ ] Set up login route (verify credentials, return JWT token)
     - [ ] Create JWT middleware for route protection
