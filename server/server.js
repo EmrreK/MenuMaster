@@ -5,14 +5,11 @@ const cors = require("cors");
 const helmet = require("helmet");
 const passport = require("passport");
 require("dotenv").config();
+const Routes = require("./Routes");
 
 const {PORT, MONGO_URI, SESSION_SECRET} = process.env;
 
 const app = express();
-
-userRouter = require("./routes/users");
-tableRouter = require("./routes/tables");
-menuRouter = require("./routes/menuitems");
 
 mongoose
 	.connect(MONGO_URI)
@@ -42,9 +39,9 @@ app.use(passport.session());
 const passportConfig = require("./config/passportConfig");
 passportConfig(passport);
 
-app.use("/api/users", userRouter);
-app.use("/api/tables", tableRouter);
-app.use("/api/menuitem", menuRouter);
+app.use("/api", Routes);
+
+app.use("/qrcodes", express.static("public/qrcodes"));
 
 app.listen(PORT, () => {
 	console.log(`Server is running on http://localhost:${PORT}`);

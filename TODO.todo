@@ -19,7 +19,7 @@
     ✔ [ ] DELETE /menu/:id (delete menu item) @started(24-10-16 19:03) @done(24-10-16 19:05) @lasted(2m2s)
   ✔ [ ] Test menu routes using Postman @done(24-10-16 20:29)
 
-- [ ] **Table Management (Admin)**
+✔ [ ] **Table Management (Admin)** @done(24-10-17 18:42)
   ✔ [ ] Create table schema (table number, availability, QR code) @done(24-10-16 18:43)
   ✔ [ ] Create Mongoose model for tables @done(24-10-16 18:43)
   ✔ [ ] Create CRUD routes for tables @done(24-10-16 19:17)
@@ -27,9 +27,9 @@
     ✔ [ ] GET /tables (get all tables) @done(24-10-16 19:17)
     ✔ [ ] PUT /tables/:id (update table status) @done(24-10-16 19:17)
     ✔ [ ] DELETE /tables/:id (delete table) @done(24-10-16 19:17)
-  - [ ] Implement QR code generation for each table
-  - [ ] Store QR code URL in the table schema
-  - [ ] Test table management routes using Postman
+  ✔ [ ] Implement QR code generation for each table @started(24-10-17 18:09) @done(24-10-17 18:42) @lasted(33m43s)
+  ✔ [ ] Store QR code URL in the table schema @started(24-10-17 18:09) @done(24-10-17 18:42) @lasted(33m43s)
+  ✔ [ ] Test table management routes using Postman @done(24-10-17 18:42)
   
   // Frontend - React
   

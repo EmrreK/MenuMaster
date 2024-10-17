@@ -1,21 +1,12 @@
 const mongoose = require("mongoose");
+const QRCode = require("qrcode");
 
 const tableSchema = new mongoose.Schema({
 	tableNumber: {
-		type: String,
-		default: "1",
-		// required: true,
+		type: Number,
+		required: true,
+		unique: true,
 	},
-	qrCodeUrl: {
-		type: String,
-		// required: true,
-	},
-	// isAvailable: {
-	// 	type: Boolean,
-	// 	default: true,
-	// },
 });
 
-const Table = mongoose.model("Table", tableSchema);
-
-module.exports = Table;
+module.exports = mongoose.model("Table", tableSchema);
