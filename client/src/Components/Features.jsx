@@ -5,6 +5,8 @@ import {
 	faFaceSmile,
 	faHand,
 	faArrowsRotate,
+	faLanguage,
+	faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Features() {
@@ -33,6 +35,20 @@ function Features() {
 				"Our QR code menus are always up-to-date, showing real-time availability and special promotions so you're never out of the loop.",
 			icon: <FontAwesomeIcon icon={faArrowsRotate} />,
 		},
+
+		{
+			name: " Multi-Language Support",
+			description:
+				"Easily switch between languages with just a tap, ensuring that everyone can browse the menu in their preferred language.",
+			icon: <FontAwesomeIcon icon={faLanguage} />,
+		},
+
+		{
+			name: " Faster Ordering",
+			description:
+				"Browse and order at your own pace without having to wait for a server to bring the menu.",
+			icon: <FontAwesomeIcon icon={faCartShopping} />,
+		},
 	];
 
 	return (
@@ -53,7 +69,7 @@ function Features() {
 					</p>
 				</div>
 				<div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-					<dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+					<dl className="grid max-w-2xl grid-cols-1 gap-x-12 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
 						{features.map((feature) => (
 							<div key={feature.name} className="relative pl-16">
 								<dt className="text-base font-semibold leading-7 text-gray-900">
