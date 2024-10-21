@@ -3,22 +3,22 @@ import React from "react";
 function BigFeature() {
 	const features = [
 		{
-			name: "Push to deploy.",
+			name: "Interactive Menu Display",
 			description:
-				"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
+				"Showcase a beautiful, interactive menu on your website. With Menubly, you can easily update menu items and prices in real time, ensuring your customers always see the latest offerings.",
 			image: "https://images.unsplash.com/photo-1600147131759-880e94a6185f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2NhbiUyMHFyfGVufDB8fDB8fHww",
 		},
 		{
-			name: "SSL certificates.",
+			name: "Easy Setup",
 			description:
-				"Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
+				"Create a custom website for your cafe or restaurant in seconds. No coding needed! Personalize it with your brand’s colors, logo, and menu. Your site will be ready to showcase your business in no time.",
 			image: "https://images.unsplash.com/photo-1600147131759-880e94a6185f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2NhbiUyMHFyfGVufDB8fDB8fHww",
 		},
 	];
 
 	return (
-		<div className="overflow-hidden bg-white py-24 sm:py-32">
-			<div className="mx-auto max-w-7xl px-6 lg:px-8">
+		<div className="overflow-hidden bg-stone-100 py-6 ">
+			<div className="mx-auto max-w-6xl px-6 lg:px-8">
 				{features.map((feature, index) => (
 					<div
 						key={index}
