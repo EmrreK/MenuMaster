@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-scroll";
+import {a} from "react-scroll";
 
 function Navbar() {
 	return (
@@ -12,22 +12,20 @@ function Navbar() {
 				</div>
 				<div className="navbar-center lg:flex">
 					<ul className="menu menu-horizontal">
-						<li className="mr-6 ">
+						<li className="mr-4">
 							<a href=" ">Home</a>
 						</li>
-						<li className="">
-							<Link to="features" smooth={true} duration={500}>
-								Features
-							</Link>
+						<li className="mr-4">
+							<a href="#features">Features</a>
 						</li>
-						<li className="">
+						<li className="mr-4">
 							<a href=" ">Demo</a>
 						</li>
-						<li className="mr-6 ">
-							<a href=" ">Pricing</a>
+						<li className="mr-4">
+							<a href="#pricing">Pricing</a>
 						</li>
-						<li className="mr-6 ">
-							<a href=" ">Contact</a>
+						<li className="mr-4">
+							<a href="#contact">Contact</a>
 						</li>
 					</ul>
 				</div>
