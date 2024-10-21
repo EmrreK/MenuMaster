@@ -3,6 +3,7 @@ import Navbar from "../Components/Navbar";
 import Hero from "../Components/Hero";
 import Features from "../Components/Features";
 import BigFeature from "../Components/BigFeature";
+import ContactUs from "../Components/ContactUs";
 
 function Homepage() {
 	return (
@@ -12,6 +13,7 @@ function Homepage() {
 				<Hero />
 				<Features />
 				<BigFeature />
+				<ContactUs />
 			</div>
 		</div>
 	);
