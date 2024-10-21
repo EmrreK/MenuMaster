@@ -33,7 +33,7 @@ function Navbar() {
 						Login
 					</a>
 					<a href=" " className="btn btn-primary ">
-						Register
+						Get Started
 					</a>
 				</div>
 			</div>

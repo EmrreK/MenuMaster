@@ -24,7 +24,11 @@ function Hero() {
 							contactless. Ready to dive in? Check our plans out
 							below."
 						</p>
-						<button className="btn btn-primary">Get Started</button>
+						<a href="#pricing">
+							<button className="btn btn-primary">
+								Get Started
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>
