@@ -12,7 +12,7 @@ function Navbar() {
 				<div className="navbar-center lg:flex">
 					<ul className="menu menu-horizontal">
 						<li className="mr-4">
-							<a href=" ">Home</a>
+							<a href="#home">Home</a>
 						</li>
 						<li className="mr-4">
 							<a href="#features">Features</a>
