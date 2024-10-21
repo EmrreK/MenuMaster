@@ -32,7 +32,7 @@ function Navbar() {
 					<a href=" " className="btn mr-4 text-white">
 						Login
 					</a>
-					<a href=" " className="btn btn-primary ">
+					<a href="#pricing" className="btn btn-primary ">
 						Get Started
 					</a>
 				</div>

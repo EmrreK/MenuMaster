@@ -15,8 +15,8 @@ function Homepage() {
 				<Hero />
 				<Features />
 				<BigFeature />
-				<ContactUs />
 				<Pricing />
+				<ContactUs />
 				<Footer />
 			</div>
 		</div>

@@ -4,7 +4,10 @@ function ContactUs() {
 	const [agreed, setAgreed] = useState(false);
 
 	return (
-		<div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+		<div
+			id="contact"
+			className="bg-white isolate bg-white px-6 py-24 sm:py-32 lg:px-8"
+		>
 			<div
 				aria-hidden="true"
 				className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -66,7 +69,7 @@ function ContactUs() {
 												? "organization"
 												: "given-name"
 										}
-										className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+										className=" bg-white block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 									/>
 								</div>
 							</div>
@@ -84,13 +87,13 @@ function ContactUs() {
 								id="message"
 								name="message"
 								rows={4}
-								className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								className="bg-white block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								defaultValue={""}
 							/>
 						</div>
 					</div>
 					<div className="flex gap-x-4 sm:col-span-2">
-						<div className="flex h-6 items-center">
+						<div className="bgflex h-6 items-center">
 							<input
 								type="checkbox"
 								checked={agreed}
@@ -101,7 +104,7 @@ function ContactUs() {
 						<label className="text-sm leading-6 text-gray-600">
 							By selecting this, you agree to our{" "}
 							<a
-								href="#"
+								href=" "
 								className="font-semibold text-indigo-600"
 							>
 								privacy policy
