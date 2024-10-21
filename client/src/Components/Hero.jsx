@@ -2,7 +2,7 @@ import React from "react";
 
 function Hero() {
 	return (
-		<div>
+		<div id="home">
 			<div
 				data-theme=""
 				className="hero min-h-screen "
