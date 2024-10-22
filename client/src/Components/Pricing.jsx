@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 
 const Pricing = () => {
-	const [isMonthly, setIsMonthly] = useState(true);
+	const [isMonthly, setIsMonthly] = useState(false);
 
 	const pricingPlans = [
 		{
@@ -45,41 +45,55 @@ const Pricing = () => {
 								className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 text-white ${
 									isMonthly
 										? "bg-blue-500"
-										: "bg-transparent text-gray-800 dark:text-gray-200"
+										: "bg-transparent text-black dark:text-gray-200"
 								} rounded-lg`}
 								onClick={() => setIsMonthly(true)}
 							>
 								Monthly
 							</button>
 							<button
-								className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 ${
+								className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 text-white  ${
 									!isMonthly
 										? "bg-blue-500"
-										: "bg-transparent text-gray-800 dark:text-gray-200"
+										: "bg-transparent text-black dark:text-gray-200"
 								} rounded-lg`}
 								onClick={() => setIsMonthly(false)}
 							>
-								Yearly
+								Annualy
 							</button>
 						</div>
 					</div>
 				</div>
 
-				<div className="grid gap-6 mt-16 -mx-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+				<div className="grid gap-6 mt-16 -mx-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4">
 					{pricingPlans.map((plan, index) => (
 						<div
 							key={index}
-							className="px-6 py-4 transition-colors duration-200 transform rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
+							className="px-6 py-4 transition-colors duration-200 transform rounded-lg bg-indigo-50 hover:bg-indigo-100 dark:hover:bg-gray-700"
 						>
-							<p className="text-lg font-medium text-gray-800 dark:text-gray-100">
-								{plan.title}
-							</p>
-							<h4 className="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100">
-								${plan.price}{" "}
-								<span className="text-base font-normal text-gray-600 dark:text-gray-400">
-									/ Month
-								</span>
-							</h4>
+							<div className="flex justify-between">
+								<p className="text-lg font-medium text-gray-800 dark:text-gray-100">
+									{plan.title}
+								</p>
+								{!isMonthly && (
+									<p className="underline text-primary">
+										Save {plan.price}$
+									</p>
+								)}
+							</div>
+
+							<div>
+								<h4 className="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100">
+									$
+									{isMonthly
+										? plan.price
+										: plan.price * 12 - plan.price}{" "}
+									<span className="text-base font-normal text-gray-600 dark:text-gray-400">
+										{isMonthly ? "/Monthly" : "/Annualy"}
+									</span>
+								</h4>
+							</div>
+
 							<p className="mt-4 text-gray-500 dark:text-gray-300">
 								{plan.description}
 							</p>

@@ -15,39 +15,72 @@ function Features() {
 			name: "Instant Access to Menus",
 			description:
 				"Simply scan the QR code with your smartphone and get immediate access to our full menu—no downloads or extra apps required.",
-			icon: <FontAwesomeIcon icon={faQrcode} size="xl" />,
+			icon: (
+				<FontAwesomeIcon
+					className="text-white dark:text-black"
+					icon={faQrcode}
+					size="xl"
+				/>
+			),
 		},
 		{
 			name: "Contactless and Hygienic",
 			description:
 				"Enjoy a fully contactless experience. Browse the menu and order directly from your device, ensuring a safer and more hygienic dining environment.",
-			icon: <FontAwesomeIcon icon={faHand} size="xl" />,
+			icon: (
+				<FontAwesomeIcon
+					className="text-white dark:text-black"
+					icon={faHand}
+					size="xl"
+				/>
+			),
 		},
 		{
 			name: "User-Friendly Interface",
 			description:
 				"Our menus are designed with simplicity in mind. Easy navigation, clear item descriptions, and vibrant images make it simple to find exactly what you’re craving.",
-			icon: <FontAwesomeIcon icon={faFaceSmile} size="xl" />,
+			icon: (
+				<FontAwesomeIcon
+					className="text-white dark:text-black"
+					icon={faFaceSmile}
+					size="xl"
+				/>
+			),
 		},
 		{
 			name: " Real-Time Updates",
 			description:
 				"Our QR code menus are always up-to-date, showing real-time availability and special promotions so you're never out of the loop.",
-			icon: <FontAwesomeIcon icon={faArrowsRotate} />,
+			icon: (
+				<FontAwesomeIcon
+					className="text-white dark:text-black"
+					icon={faArrowsRotate}
+				/>
+			),
 		},
 
 		{
 			name: " Multi-Language Support",
 			description:
 				"Easily switch between languages with just a tap, ensuring that everyone can browse the menu in their preferred language.",
-			icon: <FontAwesomeIcon icon={faLanguage} />,
+			icon: (
+				<FontAwesomeIcon
+					className="text-white dark:text-black"
+					icon={faLanguage}
+				/>
+			),
 		},
 
 		{
 			name: " Faster Ordering",
 			description:
 				"Browse and order at your own pace without having to wait for a server to bring the menu.",
-			icon: <FontAwesomeIcon icon={faCartShopping} />,
+			icon: (
+				<FontAwesomeIcon
+					className="text-white dark:text-black"
+					icon={faCartShopping}
+				/>
+			),
 		},
 	];
 
