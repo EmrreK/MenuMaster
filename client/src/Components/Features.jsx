@@ -58,9 +58,6 @@ function Features() {
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				<div className="mx-auto max-w-2xl lg:text-center">
-					<h2 className="text-base font-semibold leading-7 text-indigo-600">
-						Deploy faster
-					</h2>
 					<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
 						"The Future of Dining at Your Fingertips"
 					</p>

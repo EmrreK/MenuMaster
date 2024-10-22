@@ -34,12 +34,9 @@ function BigFeature() {
 									className="w-4/6 h-4/6 object-cover  rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
 								/>
 								{/* Text on the right */}
-								<div className="lg:pr-8 lg:pt-4">
+								<div className="lg:pr-8 lg:pt-4 ">
 									<div className="lg:max-w-lg">
-										<h2 className="text-base font-semibold leading-7 text-indigo-600">
-											Deploy faster
-										</h2>
-										<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+										<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
 											{feature.name}
 										</p>
 										<p className="mt-6 text-lg leading-8 text-gray-600 dark:text-white">
@@ -53,10 +50,7 @@ function BigFeature() {
 								{/* Text on the left */}
 								<div className="lg:pr-8 lg:pt-4">
 									<div className="lg:max-w-lg">
-										<h2 className="text-base font-semibold leading-7 text-indigo-600">
-											Deploy faster
-										</h2>
-										<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+										<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white  sm:text-4xl">
 											{feature.name}
 										</p>
 										<p className="mt-6 text-lg leading-8 text-gray-600 dark:text-white">
