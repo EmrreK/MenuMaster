@@ -34,9 +34,9 @@
   // Frontend - React
   
   - [ ] **Basic Pages**
-  - [ ] Set up React Router for navigation between pages
+  ✔ [ ] Set up React Router for navigation between pages @done(24-10-22 18:28)
   - [ ] Create basic pages
-  - [ ] Home page with navigation
+  ✔ [ ] Home page with navigation @done(24-10-22 18:27)
   - [ ] Admin login page
   - [ ] Customer menu page
   

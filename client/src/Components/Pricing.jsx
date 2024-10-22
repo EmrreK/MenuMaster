@@ -69,7 +69,7 @@ const Pricing = () => {
 					{pricingPlans.map((plan, index) => (
 						<div
 							key={index}
-							className="px-6 py-4 transition-colors duration-200 transform rounded-lg bg-indigo-50 hover:bg-indigo-100 dark:hover:bg-gray-700"
+							className="px-6 py-4 transition-colors duration-200 transform rounded-lg bg-indigo-50 hover:bg-indigo-100 dark:hover:bg-gray-600 dark:bg-gray-700"
 						>
 							<div className="flex justify-between">
 								<p className="text-lg font-medium text-gray-800 dark:text-gray-100">

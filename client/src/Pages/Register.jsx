@@ -1,4 +1,8 @@
 import React, {useState} from "react";
+import axios from "axios";
+import {base} from "@faker-js/faker";
+import e from "cors";
+import {useNavigate} from "react-router-dom";
 
 function Register() {
 	const [isMonthly, setIsMonthly] = useState(false);
@@ -27,6 +31,36 @@ function Register() {
 				"For large organizations needing comprehensive solutions.",
 		},
 	];
+
+	const navigate = useNavigate();
+
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+	const [plan, setPlan] = useState("");
+	const [username, setUsername] = useState("");
+
+	const handleRegister = async (e) => {
+		e.preventDefault();
+		if (password !== confirmPassword) {
+			alert("Passwords do not match!");
+			return;
+		} else {
+			try {
+				await axios.post("http://localhost:5000/api/users/register", {
+					email,
+					password,
+					plan,
+					username,
+				});
+				navigate("/");
+			} catch (error) {
+				console.error(error);
+				alert("Registration failed!");
+			}
+		}
+	};
+
 	return (
 		<div>
 			<section class="bg-gray-50 dark:bg-gray-900">
@@ -39,12 +73,35 @@ function Register() {
 							<form class="space-y-4 md:space-y-6" action="#">
 								<div>
 									<label
+										for="username"
+										class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+									>
+										Your username
+									</label>
+									<input
+										onChange={(e) => {
+											setUsername(e.target.value);
+										}}
+										type="username"
+										name="username"
+										id="username"
+										class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+										placeholder="name@company.com"
+										required=""
+									/>
+								</div>
+
+								<div>
+									<label
 										for="email"
 										class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 									>
 										Your email
 									</label>
 									<input
+										onChange={(e) => {
+											setEmail(e.target.value);
+										}}
 										type="email"
 										name="email"
 										id="email"
@@ -61,6 +118,9 @@ function Register() {
 										Password
 									</label>
 									<input
+										onChange={(e) => {
+											setPassword(e.target.value);
+										}}
 										type="password"
 										name="password"
 										id="password"
@@ -77,6 +137,9 @@ function Register() {
 										Confirm password
 									</label>
 									<input
+										onChange={(e) => {
+											setConfirmPassword(e.target.value);
+										}}
 										type="confirm-password"
 										name="confirm-password"
 										id="confirm-password"
@@ -95,10 +158,11 @@ function Register() {
 										</label>
 										<div className="sm:-mx-0.5 flex ">
 											<button
-												className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 text-white ${
+												type="button"
+												className={`hover:bg-blue-600 btn hover:text-white focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 dark:text-white   ${
 													isMonthly
-														? "bg-blue-500"
-														: "bg-transparent text-black dark:text-gray-200"
+														? "bg-blue-600 text-white"
+														: "bg-transparent  dark:text-gray-200"
 												} rounded-lg`}
 												onClick={() =>
 													setIsMonthly(true)
@@ -107,10 +171,11 @@ function Register() {
 												Monthly
 											</button>
 											<button
-												className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 text-white  ${
+												type="button"
+												className={`hover:bg-blue-600 hover:text-white  btn focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 dark:text-white  ${
 													!isMonthly
-														? "bg-blue-500"
-														: "bg-transparent text-black dark:text-gray-200"
+														? "bg-blue-600 text-white"
+														: "bg-transparent  dark:text-gray-200 "
 												} rounded-lg`}
 												onClick={() =>
 													setIsMonthly(false)
@@ -122,13 +187,19 @@ function Register() {
 									</div>
 
 									<select
+										onChange={(e) => {
+											setPlan(e.target.value);
+										}}
 										id="plan"
 										name="plan"
 										class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										required
 									>
 										{pricingPlans.map((plan) => (
-											<option value={plan.title}>
+											<option
+												key={plan.title}
+												value={plan.title}
+											>
 												{plan.title} Plan
 												{isMonthly
 													? ` $${plan.price} / Month`
@@ -166,8 +237,9 @@ function Register() {
 									</div>
 								</div>
 								<button
-									type="submit"
-									class="w-full btn bg-primary text-white hover:bg-primary-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600  dark:focus:ring-primary-800"
+									onClick={handleRegister}
+									type="button"
+									class="w-full btn bg-blue-600 text-white hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-blue-400 dark:focus:ring-primary-800"
 								>
 									Create an account
 								</button>
