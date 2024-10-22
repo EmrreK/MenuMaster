@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
 const Pricing = () => {
 	const [isMonthly, setIsMonthly] = useState(true);
@@ -91,9 +92,11 @@ const Pricing = () => {
 								<FeatureItem feature="Unlimited users" />
 							</div>
 
-							<button className="w-full btn btn-primary  px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform  rounded-md  focus:outline-none focus:bg-blue-600">
-								Choose plan
-							</button>
+							<Link to="/register">
+								<button className="w-full btn btn-primary  px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform  rounded-md  focus:outline-none focus:bg-blue-600">
+									Choose plan
+								</button>
+							</Link>
 						</div>
 					))}
 				</div>
