@@ -1,6 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 
 function Register() {
+	const [isMonthly, setIsMonthly] = useState(false);
+
+	const pricingPlans = [
+		{
+			title: "Intro",
+			price: 19,
+			description:
+				"For most businesses that want to optimize web queries.",
+		},
+		{
+			title: "Base",
+			price: 39,
+			description: "For businesses looking for essential features.",
+		},
+		{
+			title: "Popular",
+			price: 99,
+			description: "For businesses that want advanced capabilities.",
+		},
+		{
+			title: "Enterprise",
+			price: 199,
+			description:
+				"For large organizations needing comprehensive solutions.",
+		},
+	];
 	return (
 		<div>
 			<section class="bg-gray-50 dark:bg-gray-900">
@@ -60,30 +86,58 @@ function Register() {
 									/>
 								</div>
 								<div>
-									<label
-										for="plan"
-										class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>
-										Select a Plan
-									</label>
+									<div className="flex justify-between items-center mb-2">
+										<label
+											for="plan"
+											class="block  text-sm font-medium text-gray-900 dark:text-white"
+										>
+											Select a Plan
+										</label>
+										<div className="sm:-mx-0.5 flex ">
+											<button
+												className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 text-white ${
+													isMonthly
+														? "bg-blue-500"
+														: "bg-transparent text-black dark:text-gray-200"
+												} rounded-lg`}
+												onClick={() =>
+													setIsMonthly(true)
+												}
+											>
+												Monthly
+											</button>
+											<button
+												className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 text-white  ${
+													!isMonthly
+														? "bg-blue-500"
+														: "bg-transparent text-black dark:text-gray-200"
+												} rounded-lg`}
+												onClick={() =>
+													setIsMonthly(false)
+												}
+											>
+												Annualy
+											</button>
+										</div>
+									</div>
+
 									<select
 										id="plan"
 										name="plan"
 										class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										required
 									>
-										<option value="basic">
-											Intro Plan - $19
-										</option>
-										<option value="standard">
-											Base Plan - $39
-										</option>
-										<option value="premium">
-											Popular Plan - $99
-										</option>
-										<option value="premium">
-											Enterprice Plan - $199
-										</option>
+										{pricingPlans.map((plan) => (
+											<option value={plan.title}>
+												{plan.title} Plan
+												{isMonthly
+													? ` $${plan.price} / Month`
+													: ` $${
+															plan.price * 12 -
+															plan.price
+													  } / Year`}
+											</option>
+										))}
 									</select>
 								</div>
 								<div class="flex items-start">
