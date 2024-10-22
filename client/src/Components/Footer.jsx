@@ -4,7 +4,7 @@ import {faM} from "@fortawesome/free-solid-svg-icons";
 function Footer() {
 	return (
 		<div>
-			<footer className="footer footer-center bg-base-200 dark:bg-gray-800 text-base-content rounded p-10">
+			<footer className="footer footer-center bg-white dark:bg-gray-800 text-base-content rounded p-10">
 				<a href="#home">
 					<FontAwesomeIcon icon={faM} size="2x" />
 				</a>

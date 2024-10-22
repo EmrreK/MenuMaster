@@ -6,7 +6,7 @@ function ContactUs() {
 	return (
 		<div
 			id="contact"
-			className="bg-white isolate bg-white dark:bg-gray-900 px-6 py-24 sm:py-32 lg:px-8"
+			className=" isolate bg-stone-100 dark:bg-gray-900 px-6 py-24 sm:py-32 lg:px-8"
 		>
 			<div
 				aria-hidden="true"
