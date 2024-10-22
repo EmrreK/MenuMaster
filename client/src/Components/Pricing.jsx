@@ -29,7 +29,7 @@ const Pricing = () => {
 	];
 
 	return (
-		<section id="pricing" className="bg-white dark:bg-gray-800 mt-34">
+		<section id="pricing" className="bg-white dark:bg-gray-800  mt-34">
 			<div className="container bg-wh px-6 py-8 mx-auto">
 				<div className="sm:flex flex-col sm:items-center justify-center">
 					<div>

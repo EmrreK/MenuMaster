@@ -17,7 +17,7 @@ function BigFeature() {
 	];
 
 	return (
-		<div className="overflow-hidden bg-stone-100 py-6 ">
+		<div className="overflow-hidden bg-stone-100 py-6  dark:bg-gray-900">
 			<div className="mx-auto max-w-6xl px-6 lg:px-8">
 				{features.map((feature, index) => (
 					<div
@@ -42,7 +42,7 @@ function BigFeature() {
 										<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 											{feature.name}
 										</p>
-										<p className="mt-6 text-lg leading-8 text-gray-600">
+										<p className="mt-6 text-lg leading-8 text-gray-600 dark:text-white">
 											{feature.description}
 										</p>
 									</div>
@@ -59,7 +59,7 @@ function BigFeature() {
 										<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 											{feature.name}
 										</p>
-										<p className="mt-6 text-lg leading-8 text-gray-600">
+										<p className="mt-6 text-lg leading-8 text-gray-600 dark:text-white">
 											{feature.description}
 										</p>
 									</div>

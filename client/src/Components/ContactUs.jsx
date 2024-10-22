@@ -6,7 +6,7 @@ function ContactUs() {
 	return (
 		<div
 			id="contact"
-			className="bg-white isolate bg-white px-6 py-24 sm:py-32 lg:px-8"
+			className="bg-white isolate bg-white dark:bg-gray-900 px-6 py-24 sm:py-32 lg:px-8"
 		>
 			<div
 				aria-hidden="true"
@@ -21,12 +21,12 @@ function ContactUs() {
 				/>
 			</div>
 			<div className="mx-auto max-w-2xl text-center">
-				<h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-					Contact sales
+				<h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+					Contact Us
 				</h2>
 				<p className="mt-2 text-lg leading-8 text-gray-600">
-					Aute magna irure deserunt veniam aliqua magna enim
-					voluptate.
+					"For inquiries, support, or feedback, please don't hesitate
+					to contact us."
 				</p>
 			</div>
 			<form
@@ -47,7 +47,7 @@ function ContactUs() {
 							>
 								<label
 									htmlFor={field}
-									className="block text-sm font-semibold leading-6 text-gray-900"
+									className="block text-sm  font-semibold leading-6 text-gray-900 dark:text-white"
 								>
 									{field
 										.replace("-", " ")
@@ -55,7 +55,7 @@ function ContactUs() {
 											a.toUpperCase()
 										)}
 								</label>
-								<div className="mt-2.5">
+								<div className="mt-2.5 ">
 									<input
 										id={field}
 										name={field}
