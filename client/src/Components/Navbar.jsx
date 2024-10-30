@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
 function Navbar() {
 	const [isOpen, setIsOpen] = useState(false); // State to manage the dropdown menu
@@ -56,9 +57,10 @@ function Navbar() {
 				</div>
 				{/* Buttons for large screens only */}
 				<div className="navbar-end hidden lg:flex">
-					<a href=" " className="btn mr-4 text-white">
-						Login
-					</a>
+					<Link to="/login">
+						<button className="btn mr-4 text-white">Login</button>
+					</Link>
+
 					<a href="#pricing" className="btn btn-primary">
 						Get Started
 					</a>
@@ -98,13 +100,16 @@ function Navbar() {
 
 					{/* Stack Login and Get Started buttons for mobile */}
 					<div className="flex flex-col items-center mb-4">
-						<a
-							href=" "
-							className="btn mr-4 text-white mb-2 w-full"
-							onClick={toggleMenu}
-						>
-							Login
-						</a>
+						<Link to="/login">
+							<button
+								href=" "
+								className="btn mr-4 text-white mb-2 w-full"
+								onClick={toggleMenu}
+							>
+								Login
+							</button>
+						</Link>
+
 						<a
 							href="#pricing"
 							className="btn btn-primary w-full"

@@ -1,7 +1,5 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {base} from "@faker-js/faker";
-import e from "cors";
 import {useNavigate} from "react-router-dom";
 
 function Register() {
