@@ -5,19 +5,19 @@ const User = require("../models/User");
 const passport = require("passport");
 
 router.post("/register", async (req, res) => {
-	const {username, email, password} = req.body;
+	const {companyName, email, password} = req.body;
 
-	if (!username || !email || !password) {
+	if (!companyName || !email || !password) {
 		return res.status(400).json({message: "All fields are required"});
 	}
 
 	try {
-		const user = await User.findOne({$or: [{username}, {email}]});
+		const user = await User.findOne({$or: [{companyName}, {email}]});
 		if (user) {
 			return res.status(400).json({message: "User already exists"});
 		}
 
-		const newUser = new User({username, email, password});
+		const newUser = new User({companyName, email, password});
 
 		const salt = await bcrypt.genSalt(10);
 		newUser.password = await bcrypt.hash(password, salt);
@@ -41,7 +41,7 @@ router.post("/login", (req, res, next) => {
 				if (err) throw err;
 				return res.json({
 					message: "Successfully logged in",
-					user: {username: user.username, email: user.email},
+					user: {companyName: user.companyName, email: user.email},
 				});
 			});
 		}

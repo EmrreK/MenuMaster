@@ -2,28 +2,36 @@ const express = require("express");
 const router = express.Router();
 const MenuItem = require("../models/MenuItem");
 
-// Create Menu Item
+router.use((req, res, next) => {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	return res.status(401).json({message: "Unauthorized"});
+});
+
 router.post("/", async (req, res) => {
 	const {name, description, price, availability, category, image} = req.body;
+	const userId = req.user.userId;
 
 	if (!name || !description || !price || !category) {
 		return res.status(400).json({message: "All fields are required!"});
 	}
 
 	try {
-		// Correct way to find an existing item
-		const item = await MenuItem.findOne({name}); // Use an object to search
+		const item = await MenuItem.findOne({name, userId});
 		if (item) {
 			return res.status(400).json({
-				message: "The item you are trying to create already exists!",
+				message:
+					"The item you are trying to create already exists for this Menu!",
 			});
 		}
 
 		const newMenuItem = new MenuItem({
+			userId,
 			name,
 			description,
 			price,
-			availability, // Ensure this is handled correctly in your schema
+			availability,
 			category,
 			image,
 		});
@@ -32,14 +40,15 @@ router.post("/", async (req, res) => {
 		return res.json({message: "Menu item created successfully!"});
 	} catch (error) {
 		console.error(error);
-		return res.status(500).json({message: error.message}); // Send the error message
+		return res.status(500).json({message: error.message});
 	}
 });
 
-// Get all Menu Items
 router.get("/", async (req, res) => {
+	const userId = req.user.userId;
+
 	try {
-		const menuItems = await MenuItem.find({});
+		const menuItems = await MenuItem.find({userId});
 		return res.json(menuItems);
 	} catch (error) {
 		console.error(error);
@@ -47,20 +56,22 @@ router.get("/", async (req, res) => {
 	}
 });
 
-// Update Menu Item
 router.put("/:id", async (req, res) => {
 	const {id} = req.params;
 	const {name, description, price, availability, category, image} = req.body;
+	const userId = req.user.userId;
 
 	try {
-		const updatedItem = await MenuItem.findByIdAndUpdate(
-			id,
+		const updatedItem = await MenuItem.findOneAndUpdate(
+			{_id: id, userId},
 			{name, description, price, availability, category, image},
 			{new: true, runValidators: true}
 		);
 
 		if (!updatedItem) {
-			return res.status(404).json({message: "Menu item not found!"});
+			return res.status(404).json({
+				message: "Menu item not found or does not belong to the user!",
+			});
 		} else {
 			return res.json(updatedItem);
 		}
@@ -70,14 +81,16 @@ router.put("/:id", async (req, res) => {
 	}
 });
 
-// Delete Menu Item
 router.delete("/:id", async (req, res) => {
 	const {id} = req.params;
+	const userId = req.user.userId;
 
 	try {
-		const deletedItem = await MenuItem.findByIdAndDelete(id);
+		const deletedItem = await MenuItem.findOneAndDelete({_id: id, userId});
 		if (!deletedItem) {
-			return res.status(404).json({message: "Menu item not found!"});
+			return res.status(404).json({
+				message: "Menu item not found or does not belong to the user!",
+			});
 		} else {
 			return res.json({message: "Menu item deleted successfully!"});
 		}

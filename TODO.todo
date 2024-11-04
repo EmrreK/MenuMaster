@@ -35,10 +35,15 @@
   
   - [ ] **Basic Pages**
   ✔ [ ] Set up React Router for navigation between pages @done(24-10-22 18:28)
-  - [ ] Create basic pages
+  ✔ [ ] Create basic pages @done(24-11-01 17:35)
   ✔ [ ] Home page with navigation @done(24-10-22 18:27)
-  - [ ] Admin login page
+  ✔ [ ] Admin login page @done(24-11-01 17:35)
   - [ ] Customer menu page
+
+  - [ ] **Bug Fixes**
+  ☐ frontend cookies
+
+
   
   - [ ] **Admin Dashboard**
   - [ ] Build menu management UI
