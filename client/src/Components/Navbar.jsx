@@ -13,7 +13,7 @@ function Navbar() {
 		<div data-theme="dark" className="text-white fixed w-full z-10 ">
 			<div className="navbar p-3 ">
 				<div className="navbar-start">
-					<a href="#home" className="btn text-2xl">
+					<a href="/" className="btn text-2xl">
 						MenuMaster
 					</a>
 					{/* Hamburger icon for mobile */}
@@ -39,19 +39,19 @@ function Navbar() {
 				<div className="navbar-center lg:flex hidden">
 					<ul className="menu menu-horizontal">
 						<li className="mr-4">
-							<a href="#home">Home</a>
+							<a href="/#home">Home</a>
 						</li>
 						<li className="mr-4">
-							<a href="#features">Features</a>
+							<a href="/#features">Features</a>
 						</li>
 						<li className="mr-4">
 							<a href=" ">Demo</a>
 						</li>
 						<li className="mr-4">
-							<a href="#pricing">Pricing</a>
+							<a href="/#pricing">Pricing</a>
 						</li>
 						<li className="mr-4">
-							<a href="#contact">Contact</a>
+							<a href="/#contact">Contact</a>
 						</li>
 					</ul>
 				</div>

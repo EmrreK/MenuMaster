@@ -40,10 +40,11 @@
   ✔ [ ] Admin login page @done(24-11-01 17:35)
   - [ ] Customer menu page
 
-  - [ ] **Bug Fixes**
-  ☐ frontend cookies
 
-
+  
+  - [ ] **User Authentication UI**
+  - [ ] Implement JWT handling (storing tokens, redirecting users based on login status)
+  - [ ] Protect admin pages with authentication
   
   - [ ] **Admin Dashboard**
   - [ ] Build menu management UI
@@ -57,14 +58,7 @@
   - [ ] Add buttons to update order status (pending, preparing, served)
   
   - [ ] **Customer Interface**
-  - [ ] Create page for scanning QR code and displaying menu
   - [ ] Build interface to place orders and view order status
-  - [ ] Create seat availability page for customers to view and reserve tables
-  
-  - [ ] **User Authentication UI**
-  - [ ] Create admin registration and login forms
-  - [ ] Implement JWT handling (storing tokens, redirecting users based on login status)
-  - [ ] Protect admin pages with authentication
   
   - [ ] **QR Code Display**
   - [ ] Create a button in admin panel to generate and display QR codes for each table

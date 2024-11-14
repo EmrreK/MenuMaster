@@ -23,7 +23,7 @@ function Login() {
 				password,
 			});
 			navigate("/");
-			alert("User logged in successfully");
+			// alert("User logged in successfully");
 		} catch (error) {
 			console.error(error);
 			alert(error.response?.data?.message || "Log in failed!");

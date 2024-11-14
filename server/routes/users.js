@@ -36,30 +36,33 @@ router.post("/login", (req, res, next) => {
 		if (err) throw err;
 		if (!user) {
 			return res.status(400).json({message: info.message});
-		} else {
-			req.logIn(user, (err) => {
-				if (err) throw err;
-				return res.json({
-					message: "Successfully logged in",
-					user: {companyName: user.companyName, email: user.email},
-				});
-			});
 		}
+		req.logIn(user, (err) => {
+			if (err) throw err;
+
+			return res.json({message: "Logged in successfully"});
+		});
 	})(req, res, next);
 });
 
 router.get("/logout", (req, res) => {
-	req.logout(function (err) {
-		if (err) next(err);
-		return res.json({message: "Logged out"});
+	req.logout((err) => {
+		if (err) return next(err);
+		req.session.destroy(() => {
+			res.clearCookie("connect.sid");
+			res.json({message: "Logged out successfully"});
+		});
 	});
 });
 
 router.get("/auth", (req, res) => {
+	console.log("Session:", req.session); // Logs session data
+	console.log("User:", req.user); // Logs authenticated user object
+
 	if (req.isAuthenticated()) {
 		return res.json({user: req.user});
 	} else {
-		return res.status(401).json({message: "Login to view this resource"});
+		return res.status(401).json({message: "Not logged in"});
 	}
 });
 

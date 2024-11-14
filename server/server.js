@@ -20,7 +20,12 @@ mongoose
 		console.error(err);
 	});
 
-app.use(cors());
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+		credentials: true,
+	})
+);
 app.use(helmet());
 app.use(express.json());
 app.use("/public", express.static("public"));
@@ -30,6 +35,12 @@ app.use(
 		secret: SESSION_SECRET,
 		resave: false,
 		saveUninitialized: false,
+		cookie: {
+			httpOnly: true,
+			sameSite: "Strict",
+			secure: process.env.NODE_ENV === "production",
+			maxAge: 30 * 24 * 60 * 60 * 1000,
+		},
 	})
 );
 
