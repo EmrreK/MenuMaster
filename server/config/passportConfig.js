@@ -27,7 +27,7 @@ module.exports = function (passport) {
 						});
 					}
 				} catch (err) {
-					console.error(err);
+					return done(err);
 				}
 			}
 		)
@@ -40,10 +40,13 @@ module.exports = function (passport) {
 	passport.deserializeUser((id, done) => {
 		User.findById(id)
 			.then((user) => {
+				if (!user) {
+					return done(null, false, {message: "User not found"});
+				}
 				done(null, user);
 			})
 			.catch((err) => {
-				console.error(err);
+				return done(err);
 			});
 	});
 };

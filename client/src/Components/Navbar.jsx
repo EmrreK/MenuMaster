@@ -1,24 +1,59 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
+import {AuthContext} from "../Contexts/AuthContext";
+import axios from "axios";
 
 function Navbar() {
 	const [isOpen, setIsOpen] = useState(false); // State to manage the dropdown menu
+	const [userDropdownOpen, setUserDropdownOpen] = useState(false); // State for user dropdown
+	const {user, logoutUser} = useContext(AuthContext);
 
-	// Function to toggle the dropdown menu
+	// Toggle mobile menu
 	const toggleMenu = () => {
-		setIsOpen(!isOpen);
+		setIsOpen((prev) => !prev);
+	};
+
+	// Close mobile menu
+	const closeMenu = () => {
+		setIsOpen(false);
+	};
+
+	// Toggle user dropdown
+	const toggleUserDropdown = () => {
+		setUserDropdownOpen((prev) => !prev);
+	};
+
+	// Handle logout
+	const handleLogout = async () => {
+		try {
+			await axios.get("http://localhost:5000/api/users/logout", {
+				withCredentials: true,
+			});
+
+			logoutUser();
+			closeMenu();
+		} catch (error) {
+			console.error("Logout failed:", error);
+		}
 	};
 
 	return (
-		<div data-theme="dark" className="text-white fixed w-full z-10 ">
-			<div className="navbar p-3 ">
+		<div data-theme="dark" className="text-white fixed w-full z-10">
+			<div className="navbar p-3">
+				{/* Navbar Start */}
 				<div className="navbar-start">
 					<a href="/" className="btn text-2xl">
 						MenuMaster
 					</a>
+
 					{/* Hamburger icon for mobile */}
 					<div className="lg:hidden">
-						<button onClick={toggleMenu} className="btn btn-ghost">
+						<button
+							onClick={toggleMenu}
+							className="btn btn-ghost"
+							aria-label="Toggle menu"
+							aria-expanded={isOpen}
+						>
 							<svg
 								className="w-6 h-6"
 								fill="none"
@@ -35,35 +70,57 @@ function Navbar() {
 						</button>
 					</div>
 				</div>
-				{/* Navbar links for large screens only */}
+
+				{/* Navbar Center (Large Screens) */}
 				<div className="navbar-center lg:flex hidden">
 					<ul className="menu menu-horizontal">
-						<li className="mr-4">
-							<a href="/#home">Home</a>
-						</li>
-						<li className="mr-4">
-							<a href="/#features">Features</a>
-						</li>
-						<li className="mr-4">
-							<a href=" ">Demo</a>
-						</li>
-						<li className="mr-4">
-							<a href="/#pricing">Pricing</a>
-						</li>
-						<li className="mr-4">
-							<a href="/#contact">Contact</a>
-						</li>
+						{["Home", "Features", "Demo", "Pricing", "Contact"].map(
+							(item, index) => (
+								<li className="mr-4" key={index}>
+									<a href={`/#${item.toLowerCase()}`}>
+										{item}
+									</a>
+								</li>
+							)
+						)}
 					</ul>
 				</div>
-				{/* Buttons for large screens only */}
-				<div className="navbar-end hidden lg:flex">
-					<Link to="/login">
-						<button className="btn mr-4 text-white">Login</button>
-					</Link>
 
-					<a href="#pricing" className="btn btn-primary">
-						Get Started
-					</a>
+				{/* Navbar End */}
+				<div className="navbar-end hidden lg:flex">
+					{!user ? (
+						<>
+							<Link to="/login">
+								<button className="btn mr-4 text-white">
+									Login
+								</button>
+							</Link>
+							<a href="#pricing" className="btn btn-primary">
+								Get Started
+							</a>
+						</>
+					) : (
+						<div className="relative">
+							<button
+								className="btn btn-ghost"
+								onClick={toggleUserDropdown}
+							>
+								{user.companyName}
+							</button>
+							{userDropdownOpen && (
+								<ul className="menu bg-gray-800 p-2 rounded shadow-md absolute right-0">
+									<li>
+										<Link to="/dashboard">Dashboard</Link>
+									</li>
+									<li>
+										<button onClick={handleLogout}>
+											Logout
+										</button>
+									</li>
+								</ul>
+							)}
+						</div>
+					)}
 				</div>
 			</div>
 
@@ -71,52 +128,58 @@ function Navbar() {
 			{isOpen && (
 				<div className="lg:hidden">
 					<ul className="menu bg-gray-800 p-4">
-						<li className="mb-2">
-							<a href="#home" onClick={toggleMenu}>
-								Home
-							</a>
-						</li>
-						<li className="mb-2">
-							<a href="#features" onClick={toggleMenu}>
-								Features
-							</a>
-						</li>
-						<li className="mb-2">
-							<a href=" " onClick={toggleMenu}>
-								Demo
-							</a>
-						</li>
-						<li className="mb-2">
-							<a href="#pricing" onClick={toggleMenu}>
-								Pricing
-							</a>
-						</li>
-						<li className="mb-2">
-							<a href="#contact" onClick={toggleMenu}>
-								Contact
-							</a>
-						</li>
+						{["Home", "Features", "Demo", "Pricing", "Contact"].map(
+							(item, index) => (
+								<li className="mb-2" key={index}>
+									<a
+										href={`/#${item.toLowerCase()}`}
+										onClick={closeMenu}
+									>
+										{item}
+									</a>
+								</li>
+							)
+						)}
 					</ul>
 
-					{/* Stack Login and Get Started buttons for mobile */}
+					{/* Mobile Buttons */}
 					<div className="flex flex-col items-center mb-4">
-						<Link to="/login">
-							<button
-								href=" "
-								className="btn mr-4 text-white mb-2 w-full"
-								onClick={toggleMenu}
-							>
-								Login
-							</button>
-						</Link>
-
-						<a
-							href="#pricing"
-							className="btn btn-primary w-full"
-							onClick={toggleMenu}
-						>
-							Get Started
-						</a>
+						{!user ? (
+							<>
+								<Link to="/login">
+									<button
+										className="btn mr-4 text-white mb-2 w-full"
+										onClick={closeMenu}
+									>
+										Login
+									</button>
+								</Link>
+								<a
+									href="#pricing"
+									className="btn btn-primary w-full"
+									onClick={closeMenu}
+								>
+									Get Started
+								</a>
+							</>
+						) : (
+							<>
+								<Link to="/dashboard">
+									<button
+										className="btn mr-4 text-white mb-2 w-full"
+										onClick={closeMenu}
+									>
+										Dashboard
+									</button>
+								</Link>
+								<button
+									className="btn btn-primary w-full"
+									onClick={handleLogout}
+								>
+									Logout
+								</button>
+							</>
+						)}
 					</div>
 				</div>
 			)}

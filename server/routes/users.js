@@ -35,19 +35,30 @@ router.post("/login", (req, res, next) => {
 	passport.authenticate("local", (err, user, info) => {
 		if (err) throw err;
 		if (!user) {
-			return res.status(400).json({message: info.message});
+			return res
+				.status(400)
+				.json({message: info.message || "Invalid credentials"});
 		}
 		req.logIn(user, (err) => {
-			if (err) throw err;
+			if (err) {
+				console.error("Login error:", err);
+				return res.status(500).json({message: "Login failed"});
+			}
 
-			return res.json({message: "Logged in successfully"});
+			return res.json({
+				message: "Logged in successfully",
+				user: req.user,
+			});
 		});
 	})(req, res, next);
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", (req, res, next) => {
 	req.logout((err) => {
-		if (err) return next(err);
+		if (err) {
+			console.error("Logout error:", err);
+			return res.status(500).json({message: "Logout failed"});
+		}
 		req.session.destroy(() => {
 			res.clearCookie("connect.sid");
 			res.json({message: "Logged out successfully"});
@@ -56,9 +67,6 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/auth", (req, res) => {
-	console.log("Session:", req.session); // Logs session data
-	console.log("User:", req.user); // Logs authenticated user object
-
 	if (req.isAuthenticated()) {
 		return res.json({user: req.user});
 	} else {

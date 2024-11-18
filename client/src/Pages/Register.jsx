@@ -263,7 +263,6 @@ function Register() {
 						</div>
 					</div>
 				</section>
-				/
 			</div>
 		</>
 	);
