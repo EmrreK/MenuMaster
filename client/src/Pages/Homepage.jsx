@@ -6,6 +6,7 @@ import BigFeature from "../Components/BigFeature";
 import ContactUs from "../Components/ContactUs";
 import Pricing from "../Components/Pricing";
 import Footer from "../Components/Footer";
+import {PlanProvider} from "../Contexts/PlanContext";
 
 function Homepage() {
 	return (
@@ -15,7 +16,9 @@ function Homepage() {
 				<Hero />
 				<Features />
 				<BigFeature />
-				<Pricing />
+				<PlanProvider>
+					<Pricing />
+				</PlanProvider>
 				<ContactUs />
 				<Footer />
 			</div>

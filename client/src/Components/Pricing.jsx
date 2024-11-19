@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import {usePlan} from "../Contexts/PlanContext";
 
 const Pricing = () => {
 	const [isMonthly, setIsMonthly] = useState(false);
+	const {setSelectedPlan} = usePlan();
 
 	const pricingPlans = [
 		{
@@ -29,6 +31,11 @@ const Pricing = () => {
 		},
 	];
 
+	const handlePlanSelection = (plan) => {
+		setSelectedPlan(plan); // Set the selected plan in the context
+		console.log("Selected plan:", plan); // Debugging to confirm
+	};
+
 	return (
 		<section id="pricing" className="bg-white dark:bg-gray-800  mt-34">
 			<div className="container bg-wh px-6 py-8 mx-auto">
@@ -42,20 +49,20 @@ const Pricing = () => {
 					<div className="overflow-hidden p-0.5 mt-6 border rounded-lg dark:border-gray-700">
 						<div className="sm:-mx-0.5 flex">
 							<button
-								className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 text-white ${
+								className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 ${
 									isMonthly
-										? "bg-blue-500"
-										: "bg-transparent text-black dark:text-gray-200"
+										? "bg-blue-500 text-white "
+										: "bg-white text-black  dark:text-gray-200"
 								} rounded-lg`}
 								onClick={() => setIsMonthly(true)}
 							>
 								Monthly
 							</button>
 							<button
-								className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 text-white  ${
+								className={`focus:outline-none px-3 w-1/2 sm:w-auto py-1 sm:mx-0.5 ${
 									!isMonthly
-										? "bg-blue-500"
-										: "bg-transparent text-black dark:text-gray-200"
+										? "bg-blue-500 text-white"
+										: "bg-white text-black  dark:text-gray-200"
 								} rounded-lg`}
 								onClick={() => setIsMonthly(false)}
 							>
@@ -106,9 +113,14 @@ const Pricing = () => {
 								<FeatureItem feature="Unlimited users" />
 							</div>
 
-							<Link to="/register">
-								<button className="w-full btn btn-primary  px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform  rounded-md  focus:outline-none focus:bg-blue-600">
-									Choose plan
+							<Link to="/register" state={{selectedPlan: plan}}>
+								<button
+									onClick={() => {
+										handlePlanSelection(plan);
+									}}
+									className="w-full btn btn-primary px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform rounded-md focus:outline-none focus:bg-blue-600"
+								>
+									Choose Plan
 								</button>
 							</Link>
 						</div>

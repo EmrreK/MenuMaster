@@ -95,7 +95,7 @@ function Navbar() {
 									Login
 								</button>
 							</Link>
-							<a href="#pricing" className="btn btn-primary">
+							<a href="/#pricing" className="btn btn-primary">
 								Get Started
 							</a>
 						</>

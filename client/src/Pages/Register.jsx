@@ -1,10 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Navbar from "../Components/Navbar";
+import {usePlan} from "../Contexts/PlanContext";
+import {useLocation} from "react-router-dom";
 
 function Register() {
 	const [isMonthly, setIsMonthly] = useState(false);
+
+	const location = useLocation();
+	const passedPlan = location.state?.selectedPlan || null;
+
+	const {selectedPlan, setSelectedPlan} = usePlan();
+
+	useEffect(() => {
+		if (passedPlan) {
+			setSelectedPlan(passedPlan);
+		}
+	}, [passedPlan, setSelectedPlan]);
 
 	const pricingPlans = [
 		{
@@ -36,7 +49,7 @@ function Register() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [plan, setPlan] = useState("");
+
 	const [companyName, setCompanyName] = useState("");
 
 	const handleRegister = async (e) => {
@@ -49,7 +62,7 @@ function Register() {
 				await axios.post("http://localhost:5000/api/users/register", {
 					email,
 					password,
-					plan,
+					plan: selectedPlan?.title,
 					companyName,
 				});
 				navigate("/");
@@ -192,26 +205,37 @@ function Register() {
 										</div>
 
 										<select
+											value={selectedPlan?.title || ""}
 											onChange={(e) => {
-												setPlan(e.target.value);
+												const selectedPlanTitle =
+													e.target.value;
+												const selectedPlanObj =
+													pricingPlans.find(
+														(p) =>
+															p.title ===
+															selectedPlanTitle
+													);
+												setSelectedPlan(
+													selectedPlanObj
+												);
 											}}
 											id="plan"
 											name="plan"
 											class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 											required
 										>
-											{pricingPlans.map((plan) => (
+											{pricingPlans.map((pricingPlan) => (
 												<option
-													key={plan.title}
-													value={plan.title}
+													key={pricingPlan.title}
+													value={pricingPlan.title}
 												>
-													{plan.title} Plan
+													{pricingPlan.title} Plan
 													{isMonthly
-														? ` $${plan.price} / Month`
+														? ` $${pricingPlan.price} / Month`
 														: ` $${
-																plan.price *
+																pricingPlan.price *
 																	12 -
-																plan.price
+																pricingPlan.price
 														  } / Year`}
 												</option>
 											))}
@@ -251,12 +275,14 @@ function Register() {
 									</button>
 									<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 										Already have an account?{" "}
-										<a
-											href=" "
-											class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-										>
-											Login here
-										</a>
+										<Link to="/login">
+											<a
+												href=" "
+												class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+											>
+												Login here
+											</a>
+										</Link>
 									</p>
 								</form>
 							</div>
