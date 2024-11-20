@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {AuthContext} from "../Contexts/AuthContext";
 import axios from "axios";
 
-function Navbar() {
+function Navbar({links}) {
 	const [isOpen, setIsOpen] = useState(false); // State to manage the dropdown menu
 	const [userDropdownOpen, setUserDropdownOpen] = useState(false); // State for user dropdown
 	const {user, logoutUser} = useContext(AuthContext);
@@ -42,7 +42,10 @@ function Navbar() {
 			<div className="navbar p-3">
 				{/* Navbar Start */}
 				<div className="navbar-start">
-					<a href="/" className="btn text-2xl">
+					<a
+						href={user ? "/dashboard" : "/"}
+						className="btn text-2xl"
+					>
 						MenuMaster
 					</a>
 
@@ -74,15 +77,14 @@ function Navbar() {
 				{/* Navbar Center (Large Screens) */}
 				<div className="navbar-center lg:flex hidden">
 					<ul className="menu menu-horizontal">
-						{["Home", "Features", "Demo", "Pricing", "Contact"].map(
-							(item, index) => (
-								<li className="mr-4" key={index}>
-									<a href={`/#${item.toLowerCase()}`}>
-										{item}
-									</a>
-								</li>
-							)
-						)}
+						{(links
+							? links
+							: ["Home", "Features", "Demo", "Pricing", "Contact"]
+						).map((item, index) => (
+							<li className="mr-4" key={index}>
+								<a href={`/#${item.toLowerCase()}`}>{item}</a>
+							</li>
+						))}
 					</ul>
 				</div>
 
@@ -110,9 +112,6 @@ function Navbar() {
 							{userDropdownOpen && (
 								<ul className="menu bg-gray-800 p-2 rounded shadow-md absolute right-0">
 									<li>
-										<Link to="/dashboard">Dashboard</Link>
-									</li>
-									<li>
 										<button onClick={handleLogout}>
 											Logout
 										</button>
@@ -131,12 +130,14 @@ function Navbar() {
 						{["Home", "Features", "Demo", "Pricing", "Contact"].map(
 							(item, index) => (
 								<li className="mb-2" key={index}>
-									<a
-										href={`/#${item.toLowerCase()}`}
+									<Link
+										to={`${
+											user ? `/dashboard/` : "/#"
+										}${item.toLowerCase()}`}
 										onClick={closeMenu}
 									>
 										{item}
-									</a>
+									</Link>
 								</li>
 							)
 						)}
@@ -164,7 +165,7 @@ function Navbar() {
 							</>
 						) : (
 							<>
-								<Link to="/dashboard">
+								<Link to="/dashboard" className="w-full">
 									<button
 										className="btn mr-4 text-white mb-2 w-full"
 										onClick={closeMenu}

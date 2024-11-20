@@ -4,27 +4,63 @@ import Homepage from "./Pages/Homepage";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import {PlanProvider} from "./Contexts/PlanContext";
+import Dashboard from "./Pages/Dashboard";
+import PublicRoutes from "./Protected Routes/PublicRoutes";
+import AdminRoutes from "./Protected Routes/AdminRoutes";
+import Menu from "./Components/Menu";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Homepage />,
+		element: (
+			<PublicRoutes>
+				<PlanProvider>
+					<Homepage />
+				</PlanProvider>
+			</PublicRoutes>
+		),
 	},
 	{
 		path: "/register",
 		element: (
-			<PlanProvider>
-				<Register />
-			</PlanProvider>
+			<PublicRoutes>
+				<PlanProvider>
+					<Register />
+				</PlanProvider>
+			</PublicRoutes>
 		),
 	},
 	{
-		path: "*",
-		element: <Homepage />,
+		path: "/login",
+		element: (
+			<PublicRoutes>
+				<Login />
+			</PublicRoutes>
+		),
 	},
 	{
-		path: "/login",
-		element: <Login />,
+		path: "/dashboard",
+		element: (
+			<AdminRoutes>
+				<Dashboard />
+			</AdminRoutes>
+		),
+		children: [
+			{
+				path: "menu",
+				element: <Menu />,
+			},
+		],
+	},
+	{
+		path: "*",
+		element: (
+			<PublicRoutes>
+				<PlanProvider>
+					<Homepage />
+				</PlanProvider>
+			</PublicRoutes>
+		),
 	},
 ]);
 

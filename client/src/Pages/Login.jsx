@@ -31,7 +31,7 @@ function Login() {
 			);
 
 			loginUser(res.data.user);
-			navigate("/");
+			navigate("/dashboard");
 		} catch (error) {
 			console.error("Login error:", error);
 			alert(error.response?.data?.message || "Login failed!");
