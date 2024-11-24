@@ -13,11 +13,9 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: (
-			<PublicRoutes>
-				<PlanProvider>
-					<Homepage />
-				</PlanProvider>
-			</PublicRoutes>
+			<PlanProvider>
+				<Homepage />
+			</PlanProvider>
 		),
 	},
 	{
@@ -52,16 +50,14 @@ const router = createBrowserRouter([
 			},
 		],
 	},
-	{
-		path: "*",
-		element: (
-			<PublicRoutes>
-				<PlanProvider>
-					<Homepage />
-				</PlanProvider>
-			</PublicRoutes>
-		),
-	},
+	// {
+	// 	path: "*",
+	// 	element: (
+	// 		<PlanProvider>
+	// 			<Homepage />
+	// 		</PlanProvider>
+	// 	),
+	// },
 ]);
 
 const AppRouter = () => {
