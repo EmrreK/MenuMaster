@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 
-function Menu() {
+function DashboardMenu() {
 	const [categories, setCategories] = useState([
 		"Electronics",
 		"Books",
 		"Clothing",
+		"Drinks",
+		"food",
 	]);
 	const [products, setProducts] = useState([
 		{
@@ -55,30 +57,36 @@ function Menu() {
 				<div className="flex mb-6">
 					<div className="w-1/4 p-4">
 						<Link
-							to="menu"
-							className="block w-full mb-4 py-2 px-4 bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600 transition duration-200"
+							to="/customerMenu"
+							className="block w-full mb-4 py-2 px-4 text-center bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600 transition duration-200 sm: text-xs "
 						>
 							Go to Menu
 						</Link>
 						<button
 							onClick={handleCreateCategory}
-							className="w-full mb-4 py-2 px-4 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition duration-200"
+							className="w-full mb-4 py-2 px-4 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition duration-200  sm: text-xs"
 						>
 							Create Category
 						</button>
 						<button
 							onClick={handleCreateProduct}
-							className="w-full mb-4 py-2 px-4 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition duration-200"
+							className="w-full mb-4 py-2 px-4 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition duration-200  sm: text-xs"
 						>
 							Create Product
 						</button>
+						<hr class="h-0.5 bg-gray-300 mb-4 " />
+						<p className="text-center mb-2 text-lg font-bold">
+							Categories
+						</p>
 						<ul>
 							{categories.map((category, index) => (
 								<li
 									key={index}
-									className="mb-2 p-2 bg-gray-200 rounded-lg shadow"
+									className="mb-2 p-0 bg-gray-200 rounded-lg shadow hover:bg-gray-300 transition duration-200"
 								>
-									{category}
+									<button className="w-full p-2 text-center rounded-lg">
+										{category}
+									</button>
 								</li>
 							))}
 						</ul>
@@ -174,4 +182,4 @@ function Menu() {
 	);
 }
 
-export default Menu;
+export default DashboardMenu;

@@ -42,7 +42,10 @@ function Navbar({links}) {
 			<div className="navbar p-3">
 				{/* Navbar Start */}
 				<div className="navbar-start">
-					<a href="/" className="btn text-2xl">
+					<a
+						href={user ? "/dashboard" : "/"}
+						className="btn text-2xl"
+					>
 						MenuMaster
 					</a>
 
@@ -75,18 +78,18 @@ function Navbar({links}) {
 				<div className="navbar-center lg:flex hidden">
 					<ul className="menu menu-horizontal">
 						{(links
-							? links
-							: ["Home", "Features", "Demo", "Pricing", "Contact"]
+							? []
+							: ["Home", "Features", "Demo", "Contact"]
 						).map((item, index) => (
 							<li className="mr-4" key={index}>
-								<Link
-									to={`${
-										links ? `/dashboard/` : "/#"
+								<a
+									href={`${
+										links ? `/dashboard/` : "#"
 									}${item.toLowerCase()}`}
 									onClick={closeMenu}
 								>
 									{item}
-								</Link>
+								</a>
 							</li>
 						))}
 					</ul>
@@ -116,9 +119,6 @@ function Navbar({links}) {
 							{userDropdownOpen && (
 								<ul className="menu bg-gray-800 p-2 rounded shadow-md absolute right-0">
 									<li>
-										<a href="/dashboard">Dashboard</a>
-									</li>
-									<li>
 										<button onClick={handleLogout}>
 											Logout
 										</button>
@@ -134,34 +134,34 @@ function Navbar({links}) {
 			{isOpen && (
 				<div className="lg:hidden">
 					<ul className="menu bg-gray-800 p-4">
-						{["Home", "Features", "Demo", "Pricing", "Contact"].map(
-							(item, index) => (
-								<li className="mb-2" key={index}>
-									<Link
-										to={`${
-											links ? `/dashboard/` : "/#"
-										}${item.toLowerCase()}`}
-										onClick={closeMenu}
-									>
-										{item}
-									</Link>
-								</li>
-							)
-						)}
+						{(links
+							? []
+							: ["Home", "Features", "Demo", "Contact"]
+						).map((item, index) => (
+							<li className="mb-2" key={index}>
+								<a
+									href={`${
+										links ? `/dashboard/` : "/#"
+									}${item.toLowerCase()}`}
+									onClick={closeMenu}
+								>
+									{item}
+								</a>
+							</li>
+						))}
 					</ul>
 
 					{/* Mobile Buttons */}
 					<div className="flex flex-col items-center mb-4">
 						{!user ? (
 							<>
-								<Link to="/login">
-									<button
-										className="btn mr-4 text-white mb-2 w-full"
-										onClick={closeMenu}
-									>
-										Login
-									</button>
-								</Link>
+								<a
+									href="#pricing"
+									className="btn  w-full mb-2 text-white mt-2"
+									onClick={closeMenu}
+								>
+									Login
+								</a>
 								<a
 									href="#pricing"
 									className="btn btn-primary w-full"

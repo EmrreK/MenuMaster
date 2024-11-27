@@ -7,7 +7,7 @@ import {PlanProvider} from "./Contexts/PlanContext";
 import Dashboard from "./Pages/Dashboard";
 import PublicRoutes from "./Protected Routes/PublicRoutes"; // If you still need a public route
 import AdminRoutes from "./Protected Routes/AdminRoutes"; // Your new protected route
-import Menu from "./Components/Menu";
+import CustomerMenu from "./Pages/CustomerMenu";
 
 // Define the router
 const router = createBrowserRouter([
@@ -44,13 +44,19 @@ const router = createBrowserRouter([
 				<Dashboard />
 			</AdminRoutes>
 		),
-		// children: [
-		// 	{
-		// 		path: "menu",
-		// 		element: <Menu />,
-		// 	},
-		// ],
 	},
+
+	{
+		path: "/customerMenu",
+		element: <CustomerMenu />,
+	},
+
+	// children: [
+	// 	{
+	// 		path: "menu",
+	// 		element: <Menu />,
+	// 	},
+	// ],
 	// {
 	// 	path: "*",
 	// 	element: (
