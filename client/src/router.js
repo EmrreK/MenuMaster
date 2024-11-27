@@ -14,11 +14,9 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: (
-			<PublicRoutes>
-				<PlanProvider>
-					<Homepage />
-				</PlanProvider>
-			</PublicRoutes>
+			<PlanProvider>
+				<Homepage />
+			</PlanProvider>
 		),
 	},
 	{
@@ -46,23 +44,21 @@ const router = createBrowserRouter([
 				<Dashboard />
 			</AdminRoutes>
 		),
-		children: [
-			{
-				path: "menu",
-				element: <Menu />,
-			},
-		],
+		// children: [
+		// 	{
+		// 		path: "menu",
+		// 		element: <Menu />,
+		// 	},
+		// ],
 	},
-	{
-		path: "*",
-		element: (
-			<PublicRoutes>
-				<PlanProvider>
-					<Homepage />
-				</PlanProvider>
-			</PublicRoutes>
-		),
-	},
+	// {
+	// 	path: "*",
+	// 	element: (
+	// 		<PlanProvider>
+	// 			<Homepage />
+	// 		</PlanProvider>
+	// 	),
+	// },
 ]);
 
 // The main Router component
