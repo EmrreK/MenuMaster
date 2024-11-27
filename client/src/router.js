@@ -43,12 +43,12 @@ const router = createBrowserRouter([
 				<Dashboard />
 			</AdminRoutes>
 		),
-		children: [
-			{
-				path: "menu",
-				element: <Menu />,
-			},
-		],
+		// children: [
+		// 	{
+		// 		path: "menu",
+		// 		element: <Menu />,
+		// 	},
+		// ],
 	},
 	// {
 	// 	path: "*",

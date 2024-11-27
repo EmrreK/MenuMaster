@@ -42,10 +42,7 @@ function Navbar({links}) {
 			<div className="navbar p-3">
 				{/* Navbar Start */}
 				<div className="navbar-start">
-					<a
-						href={user ? "/dashboard" : "/"}
-						className="btn text-2xl"
-					>
+					<a href="/" className="btn text-2xl">
 						MenuMaster
 					</a>
 
@@ -82,7 +79,14 @@ function Navbar({links}) {
 							: ["Home", "Features", "Demo", "Pricing", "Contact"]
 						).map((item, index) => (
 							<li className="mr-4" key={index}>
-								<a href={`/#${item.toLowerCase()}`}>{item}</a>
+								<Link
+									to={`${
+										links ? `/dashboard/` : "/#"
+									}${item.toLowerCase()}`}
+									onClick={closeMenu}
+								>
+									{item}
+								</Link>
 							</li>
 						))}
 					</ul>
@@ -112,6 +116,9 @@ function Navbar({links}) {
 							{userDropdownOpen && (
 								<ul className="menu bg-gray-800 p-2 rounded shadow-md absolute right-0">
 									<li>
+										<a href="/dashboard">Dashboard</a>
+									</li>
+									<li>
 										<button onClick={handleLogout}>
 											Logout
 										</button>
@@ -132,7 +139,7 @@ function Navbar({links}) {
 								<li className="mb-2" key={index}>
 									<Link
 										to={`${
-											user ? `/dashboard/` : "/#"
+											links ? `/dashboard/` : "/#"
 										}${item.toLowerCase()}`}
 										onClick={closeMenu}
 									>
