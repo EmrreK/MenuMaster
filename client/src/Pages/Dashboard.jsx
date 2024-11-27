@@ -5,7 +5,7 @@ import {Outlet} from "react-router-dom";
 function Dashboard() {
 	return (
 		<div>
-			{/* <Navbar links={["Menu", "Customize", "Settings"]} /> */}
+			<Navbar links={["Menu", "Customize", "Settings"]} />
 			<Outlet />
 		</div>
 	);

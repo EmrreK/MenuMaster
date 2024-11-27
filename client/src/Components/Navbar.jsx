@@ -131,9 +131,11 @@ function Navbar({links}) {
 							(item, index) => (
 								<li className="mb-2" key={index}>
 									<Link
-										to={`${
-											user ? `/dashboard/` : "/#"
-										}${item.toLowerCase()}`}
+										to={
+											item.toLowerCase() === "menu"
+												? "/dashboard/menu"
+												: `/${item.toLowerCase()}`
+										}
 										onClick={closeMenu}
 									>
 										{item}

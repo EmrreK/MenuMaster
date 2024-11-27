@@ -5,10 +5,11 @@ import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import {PlanProvider} from "./Contexts/PlanContext";
 import Dashboard from "./Pages/Dashboard";
-import PublicRoutes from "./Protected Routes/PublicRoutes";
-import AdminRoutes from "./Protected Routes/AdminRoutes";
+import PublicRoutes from "./Protected Routes/PublicRoutes"; // If you still need a public route
+import AdminRoutes from "./Protected Routes/AdminRoutes"; // Your new protected route
 import Menu from "./Components/Menu";
 
+// Define the router
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
 	},
 ]);
 
+// The main Router component
 const AppRouter = () => {
 	return <RouterProvider router={router} />;
 };
