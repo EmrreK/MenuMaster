@@ -118,6 +118,12 @@ function Navbar({links}) {
 							</button>
 							{userDropdownOpen && (
 								<ul className="menu bg-gray-800 p-2 rounded shadow-md absolute right-0">
+									<Link to="/dashboard">
+										<li>
+											<button>DashBoard</button>
+										</li>
+									</Link>
+
 									<li>
 										<button onClick={handleLogout}>
 											Logout

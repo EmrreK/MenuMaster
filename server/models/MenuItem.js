@@ -27,13 +27,15 @@ const MenuItemSchema = new mongoose.Schema({
 	},
 
 	category: {
-		type: String,
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Category", // Link to the Category model
 		required: true,
 	},
 
 	image: {
 		type: String,
 		default: "/public/Images/defaultMenuIcon.png",
+		required: false,
 	},
 });
 
