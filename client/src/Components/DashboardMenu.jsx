@@ -121,6 +121,11 @@ function DashboardMenu() {
 		setEditProduct(null);
 	};
 
+	const handleShowAllProducts = () => {
+		setSelectedCategory(null);
+		setShowForm("renderProduct");
+	};
+
 	const renderForm = () => {
 		if (showForm === "category") {
 			return (
@@ -220,37 +225,31 @@ function DashboardMenu() {
 							/>
 						</div>
 						<div className="mb-4">
-							<details className="dropdown">
-								<summary className="btn">
-									<p>
-										{newProduct.category
-											? categories.find(
-													(category) =>
-														category._id ===
-														newProduct.category
-											  )?.name
-											: "Select a category"}
-									</p>
-								</summary>
-								<ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-									{categories.map((category) => (
-										<li key={category._id}>
-											<button
-												onClick={(e) => {
-													e.preventDefault();
-													setNewProduct({
-														...newProduct,
-														category: category._id,
-													});
-												}}
-												className="w-full p-2 text-center rounded-lg"
-											>
-												{category.name}
-											</button>
-										</li>
-									))}
-								</ul>
-							</details>
+							<label className="block text-gray-700">
+								Product Category
+							</label>
+							<select
+								value={newProduct.category || ""}
+								onChange={(e) =>
+									setNewProduct({
+										...newProduct,
+										category: e.target.value,
+									})
+								}
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							>
+								<option value="" disabled>
+									Select a category
+								</option>
+								{categories.map((category) => (
+									<option
+										key={category._id}
+										value={category._id}
+									>
+										{category.name}
+									</option>
+								))}
+							</select>
 						</div>
 						<button
 							type="submit"
@@ -263,7 +262,7 @@ function DashboardMenu() {
 			);
 		}
 
-		if (editProduct) {
+		if (editProduct && showForm === "editProduct") {
 			return (
 				<div className="bg-white p-6 shadow-md rounded-lg">
 					<h2 className="text-2xl font-bold mb-4">Edit Product</h2>
@@ -281,7 +280,7 @@ function DashboardMenu() {
 									})
 								}
 								type="text"
-								className="w-full p-2 border border-gray-300 rounded-lg"
+								className="w-full p-2 border border-grEditty-300 rounded-lg"
 							/>
 						</div>
 						<div className="mb-4">
@@ -332,33 +331,31 @@ function DashboardMenu() {
 							/>
 						</div>
 						<div className="mb-4">
-							<details className="dropdown">
-								<summary className="btn">
-									<p>
-										{editProduct.category
-											? editProduct.category
-											: "Select a category"}
-									</p>
-								</summary>
-								<ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-									{categories.map((category) => (
-										<li key={category._id}>
-											<button
-												onClick={(e) => {
-													e.preventDefault();
-													setEditProduct({
-														...editProduct,
-														category: category._id,
-													});
-												}}
-												className="w-full p-2 text-center rounded-lg"
-											>
-												{category.name}
-											</button>
-										</li>
-									))}
-								</ul>
-							</details>
+							<label className="block text-gray-700">
+								Product Category
+							</label>
+							<select
+								value={editProduct.category || ""}
+								onChange={(e) =>
+									setEditProduct({
+										...editProduct,
+										category: e.target.value,
+									})
+								}
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							>
+								<option value="" disabled>
+									Select a category
+								</option>
+								{categories.map((category) => (
+									<option
+										key={category._id}
+										value={category._id}
+									>
+										{category.name}
+									</option>
+								))}
+							</select>
 						</div>
 						<button
 							type="submit"
@@ -371,7 +368,7 @@ function DashboardMenu() {
 			);
 		}
 
-		if (editCategory) {
+		if (editCategory && showForm === "editCategory") {
 			return (
 				<div className="bg-white p-6 shadow-md rounded-lg">
 					<h2 className="text-2xl font-bold mb-4">Edit Category</h2>
@@ -418,26 +415,36 @@ function DashboardMenu() {
 				{filteredProducts.map((product) => (
 					<div
 						key={product._id}
-						className="bg-white p-4 shadow-md rounded-lg"
+						className="bg-white p-4 shadow-md rounded-lg transition-transform transform hover:scale-105"
 					>
 						<img
 							src={product.image}
 							alt={product.name}
 							className="w-full h-40 object-cover mb-4 rounded-lg"
 						/>
-						<h3 className="text-lg font-bold mb-2">
-							{product.name}
-						</h3>
-						<p>{product.description}</p>
-						<div className="flex justify-between items-center mt-4">
+						<div className="flex justify-between items-center mb-2">
+							<h3 className="text-lg font-bold">
+								{product.name}
+							</h3>
+							<h3 className="text-lg font-bold text-black underline">
+								${product.price}
+							</h3>
+						</div>
+						<p className="text-gray-700 mb-4">
+							{product.description}
+						</p>
+						<div className="flex justify-between items-center">
 							<button
-								className="btn btn-primary"
-								onClick={() => setEditProduct(product)}
+								className="py-2 px-4 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition duration-200"
+								onClick={() => {
+									setEditProduct(product);
+									setShowForm("editProduct");
+								}}
 							>
 								Edit
 							</button>
 							<button
-								className="btn btn-error"
+								className="py-2 px-4 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition duration-200"
 								onClick={() => handleDeleteProduct(product._id)}
 							>
 								Delete
@@ -473,9 +480,18 @@ function DashboardMenu() {
 							Create Product
 						</button>
 						<hr className="h-0.5 bg-gray-300 mb-4" />
+
 						<p className="text-center mb-2 text-lg font-bold">
 							Categories
 						</p>
+
+						<button
+							className="w-full p-2 text-center rounded-lg bg-gray-200 rounded-lg shadow hover:bg-gray-300 mb-2 font-bold"
+							onClick={handleShowAllProducts}
+						>
+							All Products
+						</button>
+
 						<ul>
 							{categories.map((category) => (
 								<li
@@ -485,9 +501,10 @@ function DashboardMenu() {
 									<div className="flex justify-between items-center">
 										<button
 											className="w-full p-2 text-center rounded-lg"
-											onClick={() =>
-												handleCategoryClick(category)
-											}
+											onClick={() => {
+												handleCategoryClick(category);
+												setShowForm("renderProduct");
+											}}
 										>
 											{category.name}
 										</button>
@@ -496,13 +513,13 @@ function DashboardMenu() {
 												className="btn btn-xs btn-primary ml-2"
 												onClick={() => {
 													setEditCategory(category);
-													setShowForm(null);
+													setShowForm("editCategory");
 												}}
 											>
 												Edit
 											</button>
 											<button
-												className="btn btn-xs btn-error ml-2"
+												className="btn btn-xs btn-error ml-2 mr-2"
 												onClick={() =>
 													handleDeleteCategory(
 														category._id
@@ -519,7 +536,7 @@ function DashboardMenu() {
 					</div>
 					<div className="w-3/4 p-4">
 						{renderForm()}
-						{showForm === null && renderProducts()}
+						{showForm === "renderProduct" && renderProducts()}
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,11 @@ const tableSchema = new mongoose.Schema({
 		required: true,
 		unique: true,
 	},
+
+	tableBlock: {
+		type: String,
+		required: true,
+	},
 });
 
 module.exports = mongoose.model("Table", tableSchema);
