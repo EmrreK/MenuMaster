@@ -84,9 +84,8 @@ function Navbar({links}) {
 							<li className="mr-4" key={index}>
 								<a
 									href={`${
-										links ? `/dashboard/` : "#"
+										links ? `/dashboard/` : "/#"
 									}${item.toLowerCase()}`}
-									onClick={closeMenu}
 								>
 									{item}
 								</a>
@@ -104,7 +103,7 @@ function Navbar({links}) {
 									Login
 								</button>
 							</Link>
-							<a href="/#pricing" className="btn btn-primary">
+							<a href="/register" className="btn btn-primary">
 								Get Started
 							</a>
 						</>
@@ -118,12 +117,6 @@ function Navbar({links}) {
 							</button>
 							{userDropdownOpen && (
 								<ul className="menu bg-gray-800 p-2 rounded shadow-md absolute right-0">
-									<Link to="/dashboard">
-										<li>
-											<button>DashBoard</button>
-										</li>
-									</Link>
-
 									<li>
 										<button onClick={handleLogout}>
 											Logout

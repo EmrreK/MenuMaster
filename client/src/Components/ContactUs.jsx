@@ -2,6 +2,31 @@ import React, {useState} from "react";
 
 function ContactUs() {
 	const [agreed, setAgreed] = useState(false);
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [company, setCompany] = useState("");
+	const [email, setEmail] = useState("");
+	const [message, setMessage] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (
+			firstName.trim() === "" ||
+			lastName.trim() === "" ||
+			company.trim() === "" ||
+			email.trim() === "" ||
+			message.trim() === "" ||
+			!agreed
+		) {
+			setErrorMessage(
+				<p className="text-red-500 text-sm">
+					Please fill out all fields and agree to the privacy policy.
+				</p>
+			);
+			return;
+		}
+	};
 
 	return (
 		<div
@@ -54,6 +79,19 @@ function ContactUs() {
 										type={
 											field === "email" ? "email" : "text"
 										}
+										onChange={(e) => {
+											if (field === "first-name") {
+												setFirstName(e.target.value);
+											} else if (field === "last-name") {
+												setLastName(e.target.value);
+											} else if (field === "company") {
+												setCompany(e.target.value);
+											} else if (field === "email") {
+												setEmail(e.target.value);
+											} else if (field === "message") {
+												setMessage(e.target.value);
+											}
+										}}
 										autoComplete={
 											field === "email"
 												? "email"
@@ -61,7 +99,13 @@ function ContactUs() {
 												? "organization"
 												: "given-name"
 										}
-										className=" bg-white block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+										className=" bg-white block w-full
+										rounded-md border-0 px-3.5 py-2
+										text-gray-900 shadow-sm ring-1
+										ring-inset ring-gray-300
+										placeholder:text-gray-400 focus:ring-2
+										focus:ring-inset focus:ring-indigo-600
+										sm:text-sm sm:leading-6"
 									/>
 								</div>
 							</div>
@@ -103,10 +147,12 @@ function ContactUs() {
 							</a>
 							.
 						</label>
+						{errorMessage}
 					</div>
 				</div>
 				<div className="mt-10">
 					<button
+						onClick={handleSubmit}
 						type="submit"
 						className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 					>

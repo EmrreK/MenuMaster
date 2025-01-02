@@ -30,6 +30,7 @@ function DashboardMenu() {
 
 	useEffect(() => {
 		fetchItems();
+		handleShowAllProducts();
 	}, []);
 
 	const handleCreateCategory = async (e) => {
