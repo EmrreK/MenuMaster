@@ -11,6 +11,16 @@ function DashboardMenu() {
 	const [editProduct, setEditProduct] = useState(null);
 	const [editCategory, setEditCategory] = useState(null);
 	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [location, setLocation] = useState("");
+	const [currency, setCurrency] = useState("USD");
+	const [socials, setSocials] = useState({
+		facebook: "",
+		instagram: "",
+		twitter: "",
+	});
+	const [languages, setLanguages] = useState(["English"]);
+	const [banner, setBanner] = useState(null);
+	const [profilePicture, setProfilePicture] = useState(null);
 
 	const fetchItems = async () => {
 		try {
@@ -401,6 +411,173 @@ function DashboardMenu() {
 			);
 		}
 
+		if (showForm === "settings") {
+			const handleBannerUpload = (e) => {
+				const file = e.target.files[0];
+				if (file) {
+					setBanner(URL.createObjectURL(file));
+				}
+			};
+
+			const handleProfilePictureUpload = (e) => {
+				const file = e.target.files[0];
+				if (file) {
+					setProfilePicture(URL.createObjectURL(file));
+				}
+			};
+
+			const handleSocialChange = (platform, value) => {
+				setSocials({...socials, [platform]: value});
+			};
+
+			const handleLanguageAdd = (language) => {
+				if (language && !languages.includes(language)) {
+					setLanguages([...languages, language]);
+				}
+			};
+
+			const handleLanguageRemove = (language) => {
+				setLanguages(languages.filter((lang) => lang !== language));
+			};
+
+			return (
+				<div className="p-6 flex justify-center items-center">
+					<div className="bg-white p-6 shadow-lg rounded-lg w-full max-w-3xl">
+						<h2 className="text-2xl font-bold mb-6">
+							Menu Page Settings
+						</h2>
+
+						{/* Location */}
+						<div className="mb-4">
+							<h3 className="text-lg font-medium">Location</h3>
+							<input
+								type="text"
+								value={location}
+								onChange={(e) => setLocation(e.target.value)}
+								placeholder="Enter your location"
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							/>
+						</div>
+
+						{/* Currency */}
+						<div className="mb-4">
+							<h3 className="text-lg font-medium">Currency</h3>
+							<select
+								value={currency}
+								onChange={(e) => setCurrency(e.target.value)}
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							>
+								<option value="USD">USD</option>
+								<option value="EUR">EUR</option>
+								<option value="GBP">GBP</option>
+								<option value="TRY">TRY</option>
+								<option value="JPY">JPY</option>
+							</select>
+						</div>
+
+						{/* Social Media Links */}
+						<div className="mb-4">
+							<h3 className="text-lg font-medium">
+								Social Media Links
+							</h3>
+							{["facebook", "instagram", "twitter"].map(
+								(platform) => (
+									<input
+										key={platform}
+										type="text"
+										value={socials[platform]}
+										onChange={(e) =>
+											handleSocialChange(
+												platform,
+												e.target.value
+											)
+										}
+										placeholder={`${
+											platform.charAt(0).toUpperCase() +
+											platform.slice(1)
+										} URL`}
+										className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+									/>
+								)
+							)}
+						</div>
+
+						{/* Languages */}
+						<div className="mb-4">
+							<h3 className="text-lg font-medium">Languages</h3>
+							<ul className="list-disc pl-5 mb-4">
+								{languages.map((lang) => (
+									<li
+										key={lang}
+										className="flex justify-between items-center mb-2"
+									>
+										<span>{lang}</span>
+										<button
+											onClick={() =>
+												handleLanguageRemove(lang)
+											}
+											className="bg-red-500 text-white py-1 px-2 rounded-lg"
+										>
+											Remove
+										</button>
+									</li>
+								))}
+							</ul>
+							<input
+								type="text"
+								placeholder="Add a language"
+								onKeyDown={(e) => {
+									if (e.key === "Enter") {
+										handleLanguageAdd(e.target.value);
+										e.target.value = "";
+									}
+								}}
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							/>
+						</div>
+
+						{/* Banner Upload */}
+						<div className="mb-4">
+							<h3 className="text-lg font-medium">
+								Upload Banner
+							</h3>
+							<input
+								type="file"
+								onChange={handleBannerUpload}
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							/>
+							{banner && (
+								<img
+									src={banner}
+									alt="Banner Preview"
+									className="w-full mt-4 rounded-lg"
+								/>
+							)}
+						</div>
+
+						{/* Profile Picture Upload */}
+						<div className="mb-4">
+							<h3 className="text-lg font-medium">
+								Upload Profile Picture
+							</h3>
+							<input
+								type="file"
+								onChange={handleProfilePictureUpload}
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							/>
+							{profilePicture && (
+								<img
+									src={profilePicture}
+									alt="Profile Preview"
+									className="w-32 h-32 rounded-full mt-4 object-cover"
+								/>
+							)}
+						</div>
+					</div>
+				</div>
+			);
+		}
+
 		return null;
 	};
 
@@ -431,7 +608,7 @@ function DashboardMenu() {
 								${product.price}
 							</h3>
 						</div>
-						<p className="text-gray-700 mb-4">
+						<p className="text-gray-700 mb-4 line-clamp-2">
 							{product.description}
 						</p>
 						<div className="flex justify-between items-center">
@@ -469,6 +646,12 @@ function DashboardMenu() {
 							Go to Menu
 						</Link>
 						<button
+							onClick={() => handleFormChange("settings")}
+							className="w-full mb-4 py-2 px-4 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition duration-200 sm:text-xs"
+						>
+							Settings
+						</button>
+						<button
 							onClick={() => handleFormChange("category")}
 							className="w-full mb-4 py-2 px-4 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition duration-200 sm:text-xs"
 						>
@@ -487,7 +670,7 @@ function DashboardMenu() {
 						</p>
 
 						<button
-							className="w-full p-2 text-center rounded-lg bg-gray-200 rounded-lg shadow hover:bg-gray-300 mb-2 font-bold"
+							className="w-full p-2 text-center rounded-lg bg-gray-200 shadow hover:bg-gray-300 mb-2 font-bold"
 							onClick={handleShowAllProducts}
 						>
 							All Products
