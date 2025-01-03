@@ -13,6 +13,7 @@ router.use((req, res, next) => {
 // Create a New Category
 router.post("/", async (req, res) => {
 	const {name} = req.body;
+	const {image} = req.body;
 	const userId = req.user.userId;
 
 	if (!name) {
@@ -26,7 +27,7 @@ router.post("/", async (req, res) => {
 			return res.status(400).json({message: "Category already exists!"});
 		}
 
-		const newCategory = new Category({userId, name});
+		const newCategory = new Category({userId, name, image});
 		await newCategory.save();
 
 		return res.status(201).json({
@@ -69,6 +70,7 @@ router.put("/:id", async (req, res) => {
 	try {
 		const updatedCategory = await Category.findOneAndUpdate(
 			{_id: id, userId},
+
 			{name},
 			{new: true, runValidators: true}
 		);

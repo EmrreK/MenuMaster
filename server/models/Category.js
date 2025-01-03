@@ -11,6 +11,12 @@ const categorySchema = new mongoose.Schema({
 		required: true,
 		unique: true, // Ensure category names are unique per user
 	},
+
+	image: {
+		type: String,
+		default: "/images/defaultMenuIcon.png",
+		required: false,
+	},
 });
 
 module.exports = mongoose.model("Category", categorySchema);

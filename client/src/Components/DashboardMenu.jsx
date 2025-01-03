@@ -6,6 +6,7 @@ function DashboardMenu() {
 	const [showForm, setShowForm] = useState(null);
 	const [categoryName, setCategoryName] = useState("");
 	const [categories, setCategories] = useState([]);
+	const [categoryImage, setCategoryImage] = useState("");
 	const [products, setProducts] = useState([]);
 	const [newProduct, setNewProduct] = useState({});
 	const [editProduct, setEditProduct] = useState(null);
@@ -46,7 +47,10 @@ function DashboardMenu() {
 	const handleCreateCategory = async (e) => {
 		e.preventDefault();
 		try {
-			await axios.post("/api/category", {name: categoryName});
+			await axios.post("/api/category", {
+				name: categoryName,
+				image: categoryImage,
+			});
 			setCategoryName("");
 			fetchItems();
 		} catch (err) {
@@ -151,6 +155,17 @@ function DashboardMenu() {
 								value={categoryName}
 								onChange={(e) =>
 									setCategoryName(e.target.value)
+								}
+								type="text"
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							/>
+							<label className="block text-gray-700">
+								Category Image URL
+							</label>
+							<input
+								value={categoryImage}
+								onChange={(e) =>
+									setCategoryImage(e.target.value)
 								}
 								type="text"
 								className="w-full p-2 border border-gray-300 rounded-lg"
@@ -399,6 +414,20 @@ function DashboardMenu() {
 								type="text"
 								className="w-full p-2 border border-gray-300 rounded-lg"
 							/>
+							<label className="block text-gray-700">
+								Category Image URL
+							</label>
+							<input
+								value={editCategory.image || ""}
+								onChange={(e) =>
+									setEditCategory({
+										...editCategory,
+										image: e.target.value,
+									})
+								}
+								type="text"
+								className="w-full p-2 border border-gray-300 rounded-lg"
+							/>
 						</div>
 						<button
 							type="submit"
@@ -573,6 +602,12 @@ function DashboardMenu() {
 								/>
 							)}
 						</div>
+						<button
+							type="submit"
+							className="py-2 px-4 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition duration-200"
+						>
+							Submit
+						</button>
 					</div>
 				</div>
 			);
