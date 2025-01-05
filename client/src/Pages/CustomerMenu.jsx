@@ -39,69 +39,36 @@ function CustomerMenu() {
 		return (
 			<div className="bg-gray-100 min-h-screen flex flex-col">
 				<div className="max-w-6xl mx-auto px-4 sm:px-6 flex-grow">
-					<div className="relative">
-						<img
-							alt="Bar background"
-							className="w-128 h-64 object-cover rounded-lg shadow-lg"
-							height="300"
-							src="https://storage.googleapis.com/a1aa/image/HWhSYMNNbI5IJNNlSU35mjCILqrobdtMI5s5uLcNXQAAVWAF.jpg"
-							width="1200"
-						/>
-						<div className="absolute top-4 left-4">
-							<img
-								alt="Logo"
-								className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-								height="100"
-								src="https://storage.googleapis.com/a1aa/image/7Hfe3SlegpRbYIaziWHAev9Ccs6aUiDOhc1nf4buxPBihKLgC.jpg"
-								width="100"
-							/>
-						</div>
-						<div className="absolute top-4 right-4">
-							<button className="bg-white text-gray-800 px-4 py-2 rounded-full flex items-center shadow-md hover:bg-gray-100">
-								<i className="fas fa-globe mr-2"></i>
-								EL
-								<i className="fas fa-chevron-down ml-2"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div className="bg-gray-100 min-h-screen flex flex-col">
-					<div className="max-w-6xl mx-auto px-4 sm:px-6 flex-grow">
-						<button
-							onClick={() => setShowForm("categories")}
-							className=" text-black px-4 py-2 rounded-full mb-4 flex items-center justify-center"
-						>
-							<FontAwesomeIcon
-								icon={faArrowLeft}
-								className="mt-4"
-							/>
-						</button>
-						<div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-6">
-							{filteredProducts.map((product) => (
-								<div
-									key={product._id}
-									className="bg-white p-4 shadow-md rounded-lg transition-transform transform hover:scale-105"
-								>
-									<img
-										src={product.image}
-										alt={product.name}
-										className="w-full h-40 object-cover mb-4 rounded-lg"
-									/>
-									<div className="flex justify-between items-center mb-2">
-										<h3 className="text-lg font-bold">
-											{product.name}
-										</h3>
-										<h3 className="text-lg font-bold text-black underline">
-											${product.price}
-										</h3>
-									</div>
-									<p className="text-gray-700 mb-4 line-clamp-2">
-										{product.description}
-									</p>
+					<button
+						onClick={() => setShowForm("categories")}
+						className=" text-black px-4 py-2 rounded-full mb-4 flex items-center justify-center"
+					>
+						<FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+					</button>
+					<div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
+						{filteredProducts.map((product) => (
+							<div
+								key={product._id}
+								className="bg-white p-4 shadow-md rounded-lg transition-transform transform hover:scale-105"
+							>
+								<img
+									src={product.image}
+									alt={product.name}
+									className="w-full h-40 object-cover mb-4 rounded-lg"
+								/>
+								<div className="flex justify-between items-center mb-2">
+									<h3 className="text-lg font-bold">
+										{product.name}
+									</h3>
+									<h3 className="text-lg font-bold text-black underline">
+										${product.price}
+									</h3>
 								</div>
-							))}
-						</div>
+								<p className="text-gray-700 mb-4 line-clamp-2">
+									{product.description}
+								</p>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>
@@ -130,13 +97,8 @@ function CustomerMenu() {
 								width="100"
 							/>
 						</div>
-						<div className="absolute top-4 right-4">
-							<button className="bg-white text-gray-800 px-4 py-2 rounded-full flex items-center shadow-md hover:bg-gray-100">
-								<i className="fas fa-globe mr-2"></i>
-								EL
-								<i className="fas fa-chevron-down ml-2"></i>
-							</button>
-						</div>
+
+						{/* //SOCIALS */}
 					</div>
 
 					{/* Categories */}
@@ -163,7 +125,7 @@ function CustomerMenu() {
 										</h2>
 									</div>
 									<img
-										alt={`${category.name} image`}
+										alt={`${category.name} `}
 										height="50"
 										src={category.image}
 										width="50"

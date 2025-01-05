@@ -12,8 +12,7 @@ router.use((req, res, next) => {
 
 // Create a New Category
 router.post("/", async (req, res) => {
-	const {name} = req.body;
-	const {image} = req.body;
+	const {name, image} = req.body;
 	const userId = req.user.userId;
 
 	if (!name) {
