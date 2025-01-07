@@ -12,7 +12,7 @@ const profileSettingsSchema = new mongoose.Schema({
 	},
 	currency: {
 		type: String,
-		default: "Currency",
+		default: "EUR",
 	},
 	instagramURL: {
 		type: String,

@@ -1,19 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-function Settings({setShowForm}) {
+function Settings({setShowForm, editSettings, setEditSettings, fetchSettings}) {
 	const [banner, setBanner] = useState(null);
 	const [profilePicture, setProfilePicture] = useState(null);
-	const [editSettings, setEditSettings] = useState({});
-
-	const fetchSettings = async () => {
-		try {
-			const {data: settingsData} = await axios.get("/api/settings");
-			setEditSettings(settingsData);
-		} catch (err) {
-			console.error("Failed to fetch settings:", err);
-		}
-	};
 
 	const handleSaveSettings = async () => {
 		const formData = new FormData();
@@ -95,20 +85,19 @@ function Settings({setShowForm}) {
 				<div className="mb-4">
 					<h3 className="text-lg font-medium">Currency</h3>
 					<select
-						value={editSettings.currency || ""}
-						onChange={(e) =>
+						value={editSettings.currency}
+						onChange={(e) => {
+							console.log("Currency selected:", e.target.value);
 							setEditSettings({
 								...editSettings,
 								currency: e.target.value,
-							})
-						}
+							});
+						}}
 						className="w-full p-2 border border-gray-300 rounded-lg"
 					>
-						<option value="USD">USD</option>
-						<option value="EUR">EUR</option>
-						<option value="GBP">GBP</option>
-						<option value="TRY">TRY</option>
-						<option value="JPY">JPY</option>
+						<option value="$">USD</option>
+						<option value="€">EUR</option>
+						<option value="лв">BGN</option>
 					</select>
 				</div>
 

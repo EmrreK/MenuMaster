@@ -15,6 +15,7 @@ function DashboardMenu() {
 	const [editProduct, setEditProduct] = useState(null);
 	const [products, setProducts] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [editSettings, setEditSettings] = useState({});
 
 	const [editCategory, setEditCategory] = useState(null);
 
@@ -34,7 +35,17 @@ function DashboardMenu() {
 		}
 	};
 
+	const fetchSettings = async () => {
+		try {
+			const {data: settingsData} = await axios.get("/api/settings");
+			setEditSettings(settingsData);
+		} catch (err) {
+			console.error("Failed to fetch settings:", err);
+		}
+	};
+
 	useEffect(() => {
+		fetchSettings();
 		fetchItems();
 		handleShowAllProducts();
 	}, []);
@@ -94,7 +105,14 @@ function DashboardMenu() {
 		}
 
 		if (showForm === "settings") {
-			return <Settings setShowForm={setShowForm} />;
+			return (
+				<Settings
+					editSettings={editSettings}
+					setEditSettings={setEditSettings}
+					setShowForm={setShowForm}
+					fetchSettings={fetchSettings}
+				/>
+			);
 		}
 
 		return null;
@@ -108,6 +126,7 @@ function DashboardMenu() {
 				setEditProduct={setEditProduct}
 				setShowForm={setShowForm}
 				fetchItems={fetchItems}
+				editSettings={editSettings}
 			/>
 		);
 	};

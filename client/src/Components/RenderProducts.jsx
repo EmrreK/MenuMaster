@@ -7,6 +7,7 @@ function RenderProducts({
 	setEditProduct,
 	setShowForm,
 	fetchItems,
+	editSettings,
 }) {
 	const handleDeleteProduct = async (productId) => {
 		try {
@@ -41,9 +42,13 @@ function RenderProducts({
 								{product.name}
 							</h3>
 							<h3 className="text-lg font-bold text-black underline">
-								${product.price}
+								{product.price}
+								{editSettings?.currency || ""}
 							</h3>
 						</div>
+						{!product.description && (
+							<p className="text-white">.</p>
+						)}
 						<p className="text-gray-700 mb-4 line-clamp-2">
 							{product.description}
 						</p>
