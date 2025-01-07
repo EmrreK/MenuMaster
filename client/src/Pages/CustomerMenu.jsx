@@ -41,6 +41,38 @@ function CustomerMenu() {
 		fetchItems();
 	}, []);
 
+	const renderHeader = () => (
+		<div className="relative">
+			{/* Banner */}
+			<img
+				alt="Bar background"
+				className="w-128 h-64 object-cover rounded-lg shadow-lg"
+				height="300"
+				src={
+					profileSettings.banner
+						? `/images${profileSettings.banner}`
+						: "/default-banner.jpg" // Add your placeholder banner path
+				}
+				width="1200"
+			/>
+			{/* Profile Picture */}
+			<div className="absolute top-4 left-4">
+				<img
+					alt="Logo"
+					className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+					height="100"
+					src={
+						profileSettings.profilePicture
+							? `/images${profileSettings.profilePicture}`
+							: "/default-profile.jpg" // Add your placeholder profile picture path
+					}
+					width="100"
+				/>
+			</div>
+			{/* Add social links or other details if needed */}
+		</div>
+	);
+
 	if (showForm === "products") {
 		const filteredProducts = products.filter(
 			(product) => product.category === selectedCategory
@@ -49,29 +81,10 @@ function CustomerMenu() {
 		return (
 			<div className="bg-gray-100 min-h-screen flex flex-col">
 				<div className="max-w-6xl mx-auto px-4 sm:px-6 flex-grow">
-					<div className="relative">
-						<img
-							alt="Bar background"
-							className="w-128 h-64 object-cover rounded-lg shadow-lg"
-							height="300"
-							src={`/${profileSettings.banner}`}
-							width="1200"
-						/>
-						<div className="absolute top-4 left-4">
-							<img
-								alt="Logo"
-								className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-								height="100"
-								src={`/${profileSettings.profilePicture}`}
-								width="100"
-							/>
-						</div>
-
-						{/* //SOCIALS */}
-					</div>
+					{renderHeader()}
 					<button
 						onClick={() => setShowForm("categories")}
-						className=" text-black px-4 py-2 rounded-full mb-4 flex items-center justify-center"
+						className="text-black px-4 py-2 rounded-full mb-4 flex items-center justify-center"
 					>
 						<FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
 					</button>
@@ -110,26 +123,7 @@ function CustomerMenu() {
 			<div className="bg-gray-100 min-h-screen flex flex-col">
 				<div className="max-w-6xl mx-auto px-4 sm:px-6 flex-grow">
 					{/* Header */}
-					<div className="relative">
-						<img
-							alt="Bar background"
-							className="w-128 h-64 object-cover rounded-lg shadow-lg"
-							height="300"
-							src={`/${profileSettings.banner}`}
-							width="1200"
-						/>
-						<div className="absolute top-4 left-4">
-							<img
-								alt="Logo"
-								className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-								height="100"
-								src={`/${profileSettings.profilePicture}`}
-								width="100"
-							/>
-						</div>
-
-						{/* //SOCIALS */}
-					</div>
+					{renderHeader()}
 
 					{/* Categories */}
 					<div className="mt-8 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
@@ -147,7 +141,7 @@ function CustomerMenu() {
 										setShowForm("products");
 									}}
 									key={category._id}
-									className="bg-white  rounded-lg shadow-lg flex items-center justify-between transition transform hover:scale-105 hover:shadow-xl"
+									className="bg-white rounded-lg shadow-lg flex items-center justify-between transition transform hover:scale-105 hover:shadow-xl"
 								>
 									<div>
 										<h2 className="text-2xl p-6 font-bold text-gray-800 underline">
@@ -159,7 +153,7 @@ function CustomerMenu() {
 										height="50"
 										src={category.image}
 										width="50"
-										className="ml-4 object-cover w-36 h-36 bg-gray-200 p-1 shadow-md  rounded-lg"
+										className="ml-4 object-cover w-36 h-36 bg-gray-200 p-1 shadow-md rounded-lg"
 									/>
 								</div>
 							))
