@@ -75,12 +75,12 @@ router.put(
 
 			// If files are uploaded, update their paths in the settings
 			if (req.files.banner) {
-				settings.banner = `/images/uploads/${path.basename(
+				settings.banner = `/uploads/${path.basename(
 					req.files.banner[0].path
 				)}`;
 			}
 			if (req.files.profilePicture) {
-				settings.profilePicture = `/images/uploads/${path.basename(
+				settings.profilePicture = `/uploads/${path.basename(
 					req.files.profilePicture[0].path
 				)}`;
 			}
