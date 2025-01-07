@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const passport = require("passport");
+const ProfileSettings = require("../models/ProfileSettings");
 
 router.post("/register", async (req, res) => {
 	const {companyName, email, password} = req.body;
@@ -23,6 +24,20 @@ router.post("/register", async (req, res) => {
 		newUser.password = await bcrypt.hash(password, salt);
 
 		await newUser.save();
+
+		// Create profile settings for the new user
+		const newSettings = new ProfileSettings({
+			userId: newUser._id,
+			location: "",
+			currency: "Currency",
+			instagramURL: "",
+			twitterURL: "",
+			facebookURL: "",
+			banner: "/images/defaultBanner.jpg",
+			profilePicture: "/images/defaultProfile.jpg",
+		});
+
+		await newSettings.save();
 
 		return res.json({message: "User registered successfully"});
 	} catch (error) {

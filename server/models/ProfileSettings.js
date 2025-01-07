@@ -1,11 +1,17 @@
 const mongoose = require("mongoose");
 
 const profileSettingsSchema = new mongoose.Schema({
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
+		required: true,
+	},
 	location: {
 		type: String,
 		default: "",
 	},
 	currency: {
+		type: String,
 		default: "Currency",
 	},
 	instagramURL: {
@@ -20,15 +26,12 @@ const profileSettingsSchema = new mongoose.Schema({
 		type: String,
 		default: "",
 	},
-
 	banner: {
 		type: String,
-
 		default: "/images/defaultBanner.jpg",
 	},
 	profilePicture: {
 		type: String,
-
 		default: "/images/defaultProfile.jpg",
 	},
 });

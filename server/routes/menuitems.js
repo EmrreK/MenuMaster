@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 	const userId = req.user.userId;
 
 	// Validate required fields
-	if (!name || !description || !price || !category) {
+	if (!name || !price || !category) {
 		return res.status(400).json({
 			message: "Name, description, price, and category are required!",
 		});

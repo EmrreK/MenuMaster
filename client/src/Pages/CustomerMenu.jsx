@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import {set} from "mongoose";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
@@ -9,8 +8,12 @@ function CustomerMenu() {
 	const [products, setProducts] = useState([]);
 	const [showForm, setShowForm] = useState("categories");
 	const [selectedCategory, setSelectedCategory] = useState("");
+	const [profileSettings, setProfileSettings] = useState({
+		banner: "",
+		profilePicture: "",
+	});
 
-	// Fetch categories and products from API
+	// Fetch categories, products, and profile settings from API
 	const fetchItems = async () => {
 		try {
 			const {data: categoriesData} = await axios.get("/api/category");
@@ -24,6 +27,13 @@ function CustomerMenu() {
 			setProducts(productsData);
 		} catch (err) {
 			console.error("Failed to fetch products:", err);
+		}
+
+		try {
+			const {data: settingsData} = await axios.get("/api/settings");
+			setProfileSettings(settingsData);
+		} catch (err) {
+			console.error("Failed to fetch profile settings:", err);
 		}
 	};
 
@@ -39,13 +49,33 @@ function CustomerMenu() {
 		return (
 			<div className="bg-gray-100 min-h-screen flex flex-col">
 				<div className="max-w-6xl mx-auto px-4 sm:px-6 flex-grow">
+					<div className="relative">
+						<img
+							alt="Bar background"
+							className="w-128 h-64 object-cover rounded-lg shadow-lg"
+							height="300"
+							src={`/${profileSettings.banner}`}
+							width="1200"
+						/>
+						<div className="absolute top-4 left-4">
+							<img
+								alt="Logo"
+								className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+								height="100"
+								src={`/${profileSettings.profilePicture}`}
+								width="100"
+							/>
+						</div>
+
+						{/* //SOCIALS */}
+					</div>
 					<button
 						onClick={() => setShowForm("categories")}
 						className=" text-black px-4 py-2 rounded-full mb-4 flex items-center justify-center"
 					>
 						<FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
 					</button>
-					<div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
+					<div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
 						{filteredProducts.map((product) => (
 							<div
 								key={product._id}
@@ -85,7 +115,7 @@ function CustomerMenu() {
 							alt="Bar background"
 							className="w-128 h-64 object-cover rounded-lg shadow-lg"
 							height="300"
-							src="https://storage.googleapis.com/a1aa/image/HWhSYMNNbI5IJNNlSU35mjCILqrobdtMI5s5uLcNXQAAVWAF.jpg"
+							src={`/${profileSettings.banner}`}
 							width="1200"
 						/>
 						<div className="absolute top-4 left-4">
@@ -93,7 +123,7 @@ function CustomerMenu() {
 								alt="Logo"
 								className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
 								height="100"
-								src="https://storage.googleapis.com/a1aa/image/7Hfe3SlegpRbYIaziWHAev9Ccs6aUiDOhc1nf4buxPBihKLgC.jpg"
+								src={`/${profileSettings.profilePicture}`}
 								width="100"
 							/>
 						</div>
@@ -102,7 +132,7 @@ function CustomerMenu() {
 					</div>
 
 					{/* Categories */}
-					<div className="mt-8 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
+					<div className="mt-8 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
 						{categories.length === 0 ? (
 							<div className="col-span-full text-center py-8">
 								<p className="text-lg text-gray-600">
@@ -129,7 +159,7 @@ function CustomerMenu() {
 										height="50"
 										src={category.image}
 										width="50"
-										className="ml-4 rounded-lg shadow-lg object-cover w-36 h-36 bg-gray-200 p-1 shadow-md  rounded-lg"
+										className="ml-4 object-cover w-36 h-36 bg-gray-200 p-1 shadow-md  rounded-lg"
 									/>
 								</div>
 							))

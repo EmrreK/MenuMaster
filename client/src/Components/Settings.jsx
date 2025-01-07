@@ -1,17 +1,40 @@
-import React, {useEffect} from "react";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 function Settings({setShowForm}) {
 	const [banner, setBanner] = useState(null);
 	const [profilePicture, setProfilePicture] = useState(null);
-
-	const [settings, setSettings] = useState({});
 	const [editSettings, setEditSettings] = useState({});
 
-	const handleSaveSettings = async () => {
+	const fetchSettings = async () => {
 		try {
-			await axios.put("/api/settings", editSettings);
+			const {data: settingsData} = await axios.get("/api/settings");
+			setEditSettings(settingsData);
+		} catch (err) {
+			console.error("Failed to fetch settings:", err);
+		}
+	};
+
+	const handleSaveSettings = async () => {
+		const formData = new FormData();
+		formData.append("location", editSettings.location);
+		formData.append("currency", editSettings.currency);
+		formData.append("instagramURL", editSettings.instagramURL);
+		formData.append("twitterURL", editSettings.twitterURL);
+		formData.append("facebookURL", editSettings.facebookURL);
+		if (banner) {
+			formData.append("banner", banner);
+		}
+		if (profilePicture) {
+			formData.append("profilePicture", profilePicture);
+		}
+
+		try {
+			await axios.put("/api/settings", formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
 			fetchSettings();
 		} catch (err) {
 			console.error("Failed to save settings", err);
@@ -23,23 +46,22 @@ function Settings({setShowForm}) {
 	const handleBannerUpload = (e) => {
 		const file = e.target.files[0];
 		if (file) {
-			setBanner(URL.createObjectURL(file));
+			setBanner(file);
+			setEditSettings({
+				...editSettings,
+				banner: URL.createObjectURL(file),
+			});
 		}
 	};
 
 	const handleProfilePictureUpload = (e) => {
 		const file = e.target.files[0];
 		if (file) {
-			setProfilePicture(URL.createObjectURL(file));
-		}
-	};
-
-	const fetchSettings = async () => {
-		try {
-			const {data: settingsData} = await axios.get("/api/settings");
-			setSettings(settingsData);
-		} catch (err) {
-			console.error("Failed to fetch categories:", err);
+			setProfilePicture(file);
+			setEditSettings({
+				...editSettings,
+				profilePicture: URL.createObjectURL(file),
+			});
 		}
 	};
 
@@ -93,43 +115,40 @@ function Settings({setShowForm}) {
 				{/* Social Media Links */}
 				<div className="mb-4">
 					<h3 className="text-lg font-medium">Social Media Links</h3>
-
 					<input
 						type="text"
-						value={editSettings.facebook || ""}
+						value={editSettings.facebookURL || ""}
 						onChange={(e) =>
 							setEditSettings({
 								...editSettings,
-								facebook: e.target.value,
+								facebookURL: e.target.value,
 							})
 						}
-						placeholder={"Facebook URL"}
+						placeholder="Facebook URL"
 						className="w-full p-2 border border-gray-300 rounded-lg mb-2"
 					/>
-
 					<input
 						type="text"
-						value={editSettings.instagram || ""}
+						value={editSettings.instagramURL || ""}
 						onChange={(e) =>
 							setEditSettings({
 								...editSettings,
-								instagram: e.target.value,
+								instagramURL: e.target.value,
 							})
 						}
-						placeholder={"Instagram URL"}
+						placeholder="Instagram URL"
 						className="w-full p-2 border border-gray-300 rounded-lg mb-2"
 					/>
-
 					<input
 						type="text"
-						value={editSettings.twitter || ""}
+						value={editSettings.twitterURL || ""}
 						onChange={(e) =>
 							setEditSettings({
 								...editSettings,
-								twitter: e.target.value,
+								twitterURL: e.target.value,
 							})
 						}
-						placeholder={"Twitter URL"}
+						placeholder="Twitter URL"
 						className="w-full p-2 border border-gray-300 rounded-lg mb-2"
 					/>
 				</div>
@@ -138,20 +157,13 @@ function Settings({setShowForm}) {
 				<div className="mb-4">
 					<h3 className="text-lg font-medium">Upload Banner</h3>
 					<input
-						value={editSettings.banner || ""}
 						type="file"
-						onChange={(e) => {
-							handleBannerUpload(e);
-							setEditSettings({
-								...editSettings,
-								banner: URL.createObjectURL(e.target.files[0]),
-							});
-						}}
+						onChange={handleBannerUpload}
 						className="w-full p-2 border border-gray-300 rounded-lg"
 					/>
-					{banner && (
+					{editSettings.banner && (
 						<img
-							src={banner}
+							src={editSettings.banner}
 							alt="Banner Preview"
 							className="w-full mt-4 rounded-lg"
 						/>
@@ -164,30 +176,21 @@ function Settings({setShowForm}) {
 						Upload Profile Picture
 					</h3>
 					<input
-						value={editSettings.profilePicture || ""}
 						type="file"
-						onChange={(e) => {
-							handleProfilePictureUpload(e);
-							setEditSettings({
-								...editSettings,
-								profilePicture: URL.createObjectURL(
-									e.target.files[0]
-								),
-							});
-						}}
+						onChange={handleProfilePictureUpload}
 						className="w-full p-2 border border-gray-300 rounded-lg"
 					/>
-					{profilePicture && (
+					{editSettings.profilePicture && (
 						<img
-							src={profilePicture}
+							src={editSettings.profilePicture}
 							alt="Profile Preview"
 							className="w-32 h-32 rounded-full mt-4 object-cover"
 						/>
 					)}
 				</div>
+
 				<button
 					onClick={handleSaveSettings}
-					type="submit"
 					className="py-2 px-4 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition duration-200"
 				>
 					Save Settings
