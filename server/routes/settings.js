@@ -1,16 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const ProfileSettings = require("../models/ProfileSettings");
+const User = require("../models/User");
 const multer = require("multer");
 const path = require("path");
-
-// Middleware to check if the user is authenticated
-router.use((req, res, next) => {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-	return res.status(401).json({message: "Unauthorized"});
-});
 
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
@@ -37,6 +30,27 @@ router.get("/", async (req, res) => {
 	try {
 		// Find the user's profile settings by userId
 		const settings = await ProfileSettings.findOne({userId});
+		if (!settings) {
+			return res.status(404).json({message: "Settings not found!"});
+		}
+		return res.status(200).json(settings);
+	} catch (error) {
+		console.error("Error fetching settings:", error);
+		return res.status(500).json({message: "Server error!"});
+	}
+});
+
+// Fetch Profile Settings by Store Name
+router.get("/:storeName", async (req, res) => {
+	const {storeName} = req.params;
+
+	try {
+		const user = await User.findOne({companyName: storeName});
+		if (!user) {
+			return res.status(404).json({message: "Store not found!"});
+		}
+
+		const settings = await ProfileSettings.findOne({userId: user.userId});
 		if (!settings) {
 			return res.status(404).json({message: "Settings not found!"});
 		}

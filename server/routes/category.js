@@ -1,14 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Category = require("../models/Category");
-
-// Middleware to check if the user is authenticated
-router.use((req, res, next) => {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-	return res.status(401).json({message: "Unauthorized"});
-});
+const User = require("../models/User");
 
 // Create a New Category
 router.post("/", async (req, res) => {
@@ -41,12 +34,17 @@ router.post("/", async (req, res) => {
 	}
 });
 
-// Get All Categories for the Authenticated User
-router.get("/", async (req, res) => {
-	const userId = req.user.userId;
+// Get All Categories for a Store
+router.get("/:storeName", async (req, res) => {
+	const {storeName} = req.params;
 
 	try {
-		const categories = await Category.find({userId});
+		const user = await User.findOne({companyName: storeName});
+		if (!user) {
+			return res.status(404).json({message: "Store not found!"});
+		}
+
+		const categories = await Category.find({userId: user.userId});
 		return res.status(200).json(categories);
 	} catch (error) {
 		console.error("Error fetching categories:", error);

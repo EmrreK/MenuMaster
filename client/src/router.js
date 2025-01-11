@@ -45,26 +45,10 @@ const router = createBrowserRouter([
 			</AdminRoutes>
 		),
 	},
-
 	{
-		path: "/customerMenu",
+		path: "/menu/:storeName",
 		element: <CustomerMenu />,
 	},
-
-	// children: [
-	// 	{
-	// 		path: "menu",
-	// 		element: <Menu />,
-	// 	},
-	// ],
-	// {
-	// 	path: "*",
-	// 	element: (
-	// 		<PlanProvider>
-	// 			<Homepage />
-	// 		</PlanProvider>
-	// 	),
-	// },
 ]);
 
 // The main Router component

@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import {useParams} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
 function CustomerMenu() {
+	const {storeName} = useParams();
 	const [categories, setCategories] = useState([]);
 	const [products, setProducts] = useState([]);
 	const [showForm, setShowForm] = useState("categories");
@@ -13,33 +15,38 @@ function CustomerMenu() {
 		profilePicture: "",
 	});
 
-	// Fetch categories, products, and profile settings from API
-	const fetchItems = async () => {
-		try {
-			const {data: categoriesData} = await axios.get("/api/category");
-			setCategories(categoriesData);
-		} catch (err) {
-			console.error("Failed to fetch categories:", err);
-		}
-
-		try {
-			const {data: productsData} = await axios.get("/api/menuitems");
-			setProducts(productsData);
-		} catch (err) {
-			console.error("Failed to fetch products:", err);
-		}
-
-		try {
-			const {data: settingsData} = await axios.get("/api/settings");
-			setProfileSettings(settingsData);
-		} catch (err) {
-			console.error("Failed to fetch profile settings:", err);
-		}
-	};
-
 	useEffect(() => {
+		const fetchItems = async () => {
+			try {
+				const {data: categoriesData} = await axios.get(
+					`/api/category/${storeName}`
+				);
+				setCategories(categoriesData);
+			} catch (err) {
+				console.error("Failed to fetch categories:", err);
+			}
+
+			try {
+				const {data: productsData} = await axios.get(
+					`/api/menuitems/${storeName}`
+				);
+				setProducts(productsData);
+			} catch (err) {
+				console.error("Failed to fetch products:", err);
+			}
+
+			try {
+				const {data: settingsData} = await axios.get(
+					`/api/settings/${storeName}`
+				);
+				setProfileSettings(settingsData);
+			} catch (err) {
+				console.error("Failed to fetch profile settings:", err);
+			}
+		};
+
 		fetchItems();
-	}, []);
+	}, [storeName]);
 
 	const renderHeader = () => (
 		<div className="relative">
